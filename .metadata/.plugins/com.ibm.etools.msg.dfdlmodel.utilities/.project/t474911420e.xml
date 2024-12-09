@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MessageBroker name="Mapping">
+    
+  <XSDCollection href="platform:/resource/Mapping/Sample.xsd" prefix="" targetNamespace="">
+        
+    <element href="platform:/resource/Mapping/Sample.xsd#//price;XSDElementDeclaration" name="price" type="mlib://Mapping#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+        
+    <element href="platform:/resource/Mapping/Sample.xsd#//name;XSDElementDeclaration=1" name="name" type="mlib://Mapping#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+        
+    <element href="platform:/resource/Mapping/Sample.xsd#//description;XSDElementDeclaration=2" name="description" type="mlib://Mapping#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+        
+    <element href="platform:/resource/Mapping/Sample.xsd#//calories;XSDElementDeclaration=3" name="calories" type="mlib://Mapping#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+        
+    <element href="platform:/resource/Mapping/Sample.xsd#//food;XSDElementDeclaration=4" name="food"/>
+      
+  </XSDCollection>
+  
+  <XSDCollection href="platform:/resource/MappingWithMQNodes/Sample.xsd" prefix="" targetNamespace="">
+    <element href="platform:/resource/MappingWithMQNodes/Sample.xsd#//price;XSDElementDeclaration" name="price" type="mlib://MappingWithMQNodes#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithMQNodes/Sample.xsd#//name;XSDElementDeclaration=1" name="name" type="mlib://MappingWithMQNodes#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithMQNodes/Sample.xsd#//description;XSDElementDeclaration=2" name="description" type="mlib://MappingWithMQNodes#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithMQNodes/Sample.xsd#//calories;XSDElementDeclaration=3" name="calories" type="mlib://MappingWithMQNodes#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithMQNodes/Sample.xsd#//food;XSDElementDeclaration=4" name="food"/>
+  </XSDCollection>
+</MessageBroker>

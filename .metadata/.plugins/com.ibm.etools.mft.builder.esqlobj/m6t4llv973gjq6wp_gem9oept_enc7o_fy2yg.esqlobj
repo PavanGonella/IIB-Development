@@ -1,0 +1,13 @@
+CREATE FILTER MODULE Task2_mf_Filter
+    CREATE FUNCTION Main() RETURNS BOOLEAN
+    BEGIN
+        DECLARE var REFERENCE TO Root.XMLNSC;
+        IF var.Name = 'Eidiko' THEN
+            RETURN TRUE;
+        ELSEIF var.Name = 'Pavan' THEN
+            RETURN FALSE;
+        ELSE 
+        	RETURN UNKNOWN;   
+        END IF;
+    END ;
+END MODULE;

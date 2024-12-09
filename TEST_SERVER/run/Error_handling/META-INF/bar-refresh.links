@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy:Deploy xmlns:deploy="http://www.ibm.com/xmlns/prod/wmb/deploy/6.0.0" overrideConfigurableProperties="false" includeESQL="false">
+  <deployables>
+    <deployable deployed="true" barResourceTimeStamp="1725465858071" workspaceResource="/Error_handling/DB_mf_Compute2.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\DB_mf_Compute2.esql.&#xA;Successfully added file Error_handling\DB_mf_Compute2.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="DB_mf_Compute2.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725314881866" workspaceResource="/Error_handling/application.descriptor">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\application.descriptor.&#xA;Successfully added file Error_handling\application.descriptor to BAR file.&#xA;Elapsed time: 0 second(s).&#xA;&#xA;Successfully added file Error_handling\application.descriptor to BAR file.&#xA;" severity="0"/>
+      <barEntry name="application.descriptor"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725551864349" workspaceResource="/Error_handling/error_handle.msgflow">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle.msgflow.&#xA;Successfully added file Error_handling\error_handle.msgflow to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle.msgflow"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725316241864" workspaceResource="/Error_handling/error_handle_Compute.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle_Compute.esql.&#xA;Successfully added file Error_handling\error_handle_Compute.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle_Compute.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725395566509" workspaceResource="/Error_handling/error_handle_Compute1.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle_Compute1.esql.&#xA;Successfully added file Error_handling\error_handle_Compute1.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle_Compute1.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725318842682" workspaceResource="/Error_handling/error_handle_Compute2.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle_Compute2.esql.&#xA;Successfully added file Error_handling\error_handle_Compute2.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle_Compute2.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725318852080" workspaceResource="/Error_handling/error_handle_Compute3.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle_Compute3.esql.&#xA;Successfully added file Error_handling\error_handle_Compute3.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle_Compute3.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725395774898" workspaceResource="/Error_handling/error_handle_Compute4.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\error_handle_Compute4.esql.&#xA;Successfully added file Error_handling\error_handle_Compute4.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="error_handle_Compute4.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725392396371" workspaceResource="/Error_handling/jsonvaler1.schema.json">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file Error_handling\jsonvaler1.schema.json.&#xA;Successfully added file Error_handling\jsonvaler1.schema.json to BAR file.&#xA;Elapsed time: 0 second(s).&#xA;&#xA;Successfully added file Error_handling\jsonvaler1.schema.json to BAR file.&#xA;" severity="0"/>
+      <barEntry name="jsonvaler1.schema.json"/>
+    </deployable>
+  </deployables>
+</deploy:Deploy>

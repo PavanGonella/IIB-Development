@@ -1,0 +1,11 @@
+CREATE COMPUTE MODULE Flow1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	DECLARE var REFERENCE TO InputRoot.XMLNSC.Emp;
+	CALL myProc(var.Name, var.Age, var.Salary);
+		
+    SET OutputRoot.JSON.Data.Result = 'Successsfully inserted';
+		
+	END;
+
+    END MODULE;

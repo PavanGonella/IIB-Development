@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Broker deployBarfile="C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\GeneratedBarFiles\Error_handlingproject.generated.bar" deployTimestamp="2024-09-05 16:01:58">
+  <CompiledApplication>
+    <ConfigurableProperty uri="startMode">
+    </ConfigurableProperty>
+  </CompiledApplication>
+  <CompiledMessageFlow name="error_handle" deployBarfile="C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\GeneratedBarFiles\Error_handlingproject.generated.bar" deployTimestamp="2024-09-05 16:01:58">
+    <ConfigurableProperty uri="error_handle#Compute.connectDatasourceBeforeFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute.dataSource">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute1.connectDatasourceBeforeFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute1.dataSource">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute1.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute4.connectDatasourceBeforeFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute4.dataSource">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Compute4.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.URLSpecifier" override="/p1">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.decompressInputMessage">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.faultFormat">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.timeoutForClient">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.useHTTPS">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Input.validateMaster" override="contentAndValue">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Reply.compressionType">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#HTTP Reply.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Trace.filePath" override="C:\Users\Sreenivas Bandaru\Desktop\TEST\Error_log\trace.log">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#Validate.validateMaster" override="contentAndValue">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#additionalInstances">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#commitCount">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#commitInterval">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#consumerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#consumerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#coordinatedTransaction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#maximumRateMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#monitoringProfile">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#notificationThresholdMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#processingTimeoutAction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#processingTimeoutSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#providerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#providerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#startInstancesWhenFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#startMode">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="error_handle#wlmPolicy">
+    </ConfigurableProperty>
+  </CompiledMessageFlow>
+</Broker>

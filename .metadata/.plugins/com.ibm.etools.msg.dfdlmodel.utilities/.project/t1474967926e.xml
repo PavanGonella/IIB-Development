@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MessageBroker name="MappingWithFileNode">
+  <XSDCollection href="platform:/resource/MappingWithFileNode/Sample.xsd" prefix="" targetNamespace="">
+    <element href="platform:/resource/MappingWithFileNode/Sample.xsd#//price;XSDElementDeclaration" name="price" type="mlib://MappingWithFileNode#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithFileNode/Sample.xsd#//name;XSDElementDeclaration=1" name="name" type="mlib://MappingWithFileNode#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithFileNode/Sample.xsd#//description;XSDElementDeclaration=2" name="description" type="mlib://MappingWithFileNode#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithFileNode/Sample.xsd#//calories;XSDElementDeclaration=3" name="calories" type="mlib://MappingWithFileNode#/-/simpleType{http://www.w3.org/2001/XMLSchema}string"/>
+    <element href="platform:/resource/MappingWithFileNode/Sample.xsd#//food;XSDElementDeclaration=4" name="food"/>
+  </XSDCollection>
+</MessageBroker>

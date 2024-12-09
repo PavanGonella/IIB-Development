@@ -1,0 +1,34 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		DECLARE InRef REFERENCE TO InputRoot.XMLNSC.EmpDetails;
+		CREATE FIELD OutputRoot.JSON.Data.Details.EmpDetailsOut;
+		DECLARE OutRef REFERENCE TO OutputRoot.JSON.Data.EmpDetailsOut;
+		
+		
+		SET OutRef.EmpOut[1].EmpIdOut = InRef.Emp[1].EmpId;
+		SET OutRef.EmpOut[1].EmpNameOut = InRef.Emp[1].EmpName;
+		SET OutRef.EmpOut[1].EmpDeptOut = InRef.Emp[1].EmpDept;
+		SET OutRef.EmpOut[1].EmpCompanyOut = InRef.Emp[1].EmpCompany;
+		
+		
+		SET OutRef.EmpOut[2].EmpIdOut = InRef.Emp[2].EmpId;
+		SET OutRef.EmpOut[2].EmpNameOut = InRef.Emp[2].EmpName;
+		SET OutRef.EmpOut[1].EmpDeptOut = InRef.Emp[1].EmpDept;
+		SET OutRef.EmpOut[1].EmpCompanyOut = InRef.Emp[1].EmpCompany;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;

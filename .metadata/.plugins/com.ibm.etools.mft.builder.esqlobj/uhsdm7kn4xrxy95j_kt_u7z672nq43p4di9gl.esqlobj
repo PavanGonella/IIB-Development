@@ -1,0 +1,19 @@
+CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE Inref REFERENCE TO InputRoot.XMLNSC;
+		DECLARE myBlob, myBlob2 BLOB;
+		DECLARE myChar,myChar2 CHARACTER;
+		
+		SET myBlob = ASBITSTREAM(InputRoot.XMLNSC);
+		SET myChar = CAST(myBlob AS CHARACTER CCSID InputRoot.Properties.CodedCharSetId ENCODING InputRoot.Properties.Encoding);
+		call callpro(ApplicationLabel,MessageFlowLabel,myChar,CURRENT_TIMESTAMP,'channel_request');
+		
+		SET OutputRoot.JSON.Data.Invoice = Inref.Invoice;
+		
+		DECLARE Jsonref REFERENCE TO OutputRoot.JSON;
+		SET myBlob2 = ASBITSTREAM(Jsonref);
+		SET myChar2 = CAST(myBlob2 AS CHARACTER CCSID InputRoot.Properties.CodedCharSetId);
+		
+		call callpro(ApplicationLabel,MessageFlowLabel,myChar2,CURRENT_TIMESTAMP,'host_request');
+		
+		
+	END;
