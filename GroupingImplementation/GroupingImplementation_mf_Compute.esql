@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE GroupingImplementation_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inRef REFERENCE TO InputRoot.XMLNSC.Student.st1;
+		SET OutputRoot.XMLNSC.First = inRef.Id;
+		RETURN TRUE;
+	END;
+END MODULE;

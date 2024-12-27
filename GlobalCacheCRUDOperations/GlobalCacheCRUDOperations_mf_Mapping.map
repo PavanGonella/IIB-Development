@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <inlinedXMLSchema>
+        <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+       
+  <xsd:element name="code" nillable="true" type="xsd:string"/> 
+   
+</xsd:schema> 
+]]>
+    </inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var4"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var1"/>
+    <output path="jar:file://!com/ibm/msl/mapping/cache/xsds/cache.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var3"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://www.ibm.com/iib/msl/json"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="GlobalCacheCRUDOperations_mf_Mapping">
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var1/mb:msg(JSON,assembly,JSON,Properties)" var="ComIbmMessageAssembly_JSON1">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON1/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var1" var="anyType"/>
+        </output>
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var3/mb:msg(JSON,assembly,JSON,Properties)" var="MessageAssembly">
+            <cast castType="userDefined" path="$MessageAssembly/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var3" var="anyType1"/>
+            <cast castType="userDefined" path="$MessageAssembly/JSON/spath('Data',2)/any" qualifier="code" ref="var4" var="any"/>
+        </output>
+        <cachePut mode="upsert">
+            <output path="$var2/CachePut"/>
+            <assign value="ValueInCache">
+                <output path="Value"/>
+            </assign>
+            <assign value="MyGlobalCacheVariable">
+                <output path="Key"/>
+            </assign>
+        </cachePut>
+        <assign value="1142">
+            <output path="$MessageAssembly/JSON/spath('Data',2)/code"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

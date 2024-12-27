@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE GroupingImplementation_mf_Compute2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE inref1 REFERENCE TO
+		InputRoot.ComIbmGroupCompleteNode.Group.Replies.b1.Reply.Root.XMLNSC.First;
+		DECLARE inref2 REFERENCE TO
+		InputRoot.ComIbmGroupCompleteNode.Group.Replies.b2.Reply.Root.XMLNSC.Second;
+		SET OutputRoot.XMLNSC.Student.First.ID = inref1.Id;
+		SET OutputRoot.XMLNSC.Student.First.Name = inref1.Name;
+		SET OutputRoot.XMLNSC.Student.Second.ID = inref2.Id;
+		SET OutputRoot.XMLNSC.Student.Second.Name = inref2.Name;
+		RETURN TRUE;
+	END;
+END MODULE;

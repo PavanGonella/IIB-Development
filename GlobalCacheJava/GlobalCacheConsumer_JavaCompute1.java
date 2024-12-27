@@ -1,46 +1,29 @@
 import com.ibm.broker.javacompute.MbJavaComputeNode;
-import com.ibm.broker.plugin.MbElement;
 import com.ibm.broker.plugin.MbException;
 import com.ibm.broker.plugin.MbGlobalMap;
 import com.ibm.broker.plugin.MbMessage;
 import com.ibm.broker.plugin.MbMessageAssembly;
 import com.ibm.broker.plugin.MbOutputTerminal;
 import com.ibm.broker.plugin.MbUserException;
-import com.ibm.broker.plugin.MbXMLNSC;
 
-public class GlobalCacheApplication_mf_JavaCompute extends MbJavaComputeNode {
+public class GlobalCacheConsumer_JavaCompute1 extends MbJavaComputeNode {
 
 	public void evaluate(MbMessageAssembly inAssembly) throws MbException {
 		MbOutputTerminal out = getOutputTerminal("out");
 		MbOutputTerminal alt = getOutputTerminal("alternate");
 
 		MbMessage inMessage = inAssembly.getMessage();
-
-		// create new empty message
-		
-		
-		MbMessage outMessage = new MbMessage();
-		MbMessageAssembly outAssembly = new MbMessageAssembly(inAssembly, outMessage);
-
-		MbElement InputRoot = inMessage.getRootElement().getLastChild();
-		MbElement EmpObject = InputRoot.getFirstElementByPath("Employee");
-		
-		String Message = EmpObject.getFirstElementByPath("Message").getValueAsString();
-		String ID = EmpObject.getFirstElementByPath("ID").getValueAsString();
-		String Name = EmpObject.getFirstElementByPath("Name").getValueAsString();
-		
+		MbMessageAssembly outAssembly = null;
 		try {
-			// optionally copy message headers
-			copyMessageHeaders(inMessage, outMessage);
+			// create new message as a copy of the input
+			MbMessage outMessage = new MbMessage(inMessage);
+			outAssembly = new MbMessageAssembly(inAssembly, outMessage);
 			// ----------------------------------------------------------
 			// Add user code below
-			MbGlobalMap globalMap = MbGlobalMap.getGlobalMap("Mymap");
-			if(globalMap.containsKey(ID)){
-				globalMap.update(ID, Name);
-			}
-			else {
-				globalMap.put(ID, Name);
-			}
+		    // Retrieve a value from the global cache 
+			MbGlobalMap globalMap = MbGlobalMap.getGlobalMap("MyGlobalCache");
+			String value = (String) globalMap.get("myKey"); // Log the retrieved value 
+			System.out.println("Retrieved value from global cache: " + value);;
 			// End of user code
 			// ----------------------------------------------------------
 		} catch (MbException e) {
@@ -54,27 +37,10 @@ public class GlobalCacheApplication_mf_JavaCompute extends MbJavaComputeNode {
 			// Example handling ensures all exceptions are re-thrown to be handled in the flow
 			throw new MbUserException(this, "evaluate()", "", "", e.toString(), null);
 		}
-		
-		MbElement OutputRoot = outMessage.getRootElement().createElementAsLastChild(MbXMLNSC.PARSER_NAME);
-		MbElement ResponseObject = OutputRoot.createElementAsLastChild(MbXMLNSC.FOLDER,"Response","");
-		ResponseObject.createElementAsLastChild(MbXMLNSC.FOLDER,"Message","Data loaded successfully");
+		// The following should only be changed
+		// if not propagating message to the 'out' terminal
 		out.propagate(outAssembly);
-	}
 
-	public void copyMessageHeaders(MbMessage inMessage, MbMessage outMessage) throws MbException {
-		MbElement outRoot = outMessage.getRootElement();
-
-		// iterate though the headers starting with the first child of the root
-		// element, stopping before the last child (body)
-		MbElement header = inMessage.getRootElement().getFirstChild();
-		while (header != null && header.getNextSibling() != null) {
-			// copy the header and add it to the out message
-			MbElement newHeader = outRoot.createElementAsLastChild(header.getParserClassName());
-			newHeader.setName(header.getName());
-			newHeader.copyElementTree(header);
-			// move along to next header
-			header = header.getNextSibling();
-		}
 	}
 
 	/**

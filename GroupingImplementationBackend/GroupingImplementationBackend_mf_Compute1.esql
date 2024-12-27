@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE GroupingImplementationBackend_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.Second.Id = InputRoot.XMLNSC.Second;
+		SET OutputRoot.XMLNSC.Second.Name = 'Adesh';
+		RETURN TRUE;
+	END;
+END MODULE;

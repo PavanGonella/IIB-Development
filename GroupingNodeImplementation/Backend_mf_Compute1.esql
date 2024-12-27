@@ -1,0 +1,14 @@
+
+
+CREATE COMPUTE MODULE Backend_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.data.passenger.details.name  = 'Phani';
+		SET OutputRoot.XMLNSC.data.passenger.details.age  = 23;
+        SET OutputRoot.XMLNSC.data.passenger.details.gender = 'male';
+        SET OutputRoot.XMLNSC.data.passenger.details.id  = 'ESUS759A';
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

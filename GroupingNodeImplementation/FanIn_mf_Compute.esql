@@ -1,0 +1,15 @@
+
+
+CREATE COMPUTE MODULE FanIn_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.ComIbmGroupCompleteNode.Group.Replies.grp.Reply.Root.XMLNSC.data;
+		DECLARE var2 REFERENCE TO InputRoot.ComIbmGroupCompleteNode.Group.Replies.grp2.Reply.Root.XMLNSC.data;
+		
+		SET OutputRoot.JSON.Data.flight.details = var.flight.details;
+		SET OutputRoot.JSON.Data.passenger.details = var2.passenger.details;
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE GroupingImplementationBackend_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.First.Id = InputRoot.XMLNSC.First;
+		SET OutputRoot.XMLNSC.First.Name = 'Pawan';
+		RETURN TRUE;
+	END;
+END MODULE;
