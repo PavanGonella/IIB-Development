@@ -1,0 +1,26 @@
+
+
+Importing file: C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace3\SendingFileAsAttachmentUsingSoap\SendingFileAsAttachmentUsingSoap.wsdl
+
+
+The following is a list of WS-I warning messages found when importing:
+WS-I BP 1.1: (BP2119) The SOAP body must specify the parts attribute with a valid part name because the associated message declares more than one part., Line: 57, Column: 9
+
+
+The WSDL import will proceed with bindings SendingFileAsAttachmentUsingSoapSOAP.
+Creating wsdl schema document for file:///C:/Users/Sreenivas Bandaru/IBM/ACET12/workspace3/SendingFileAsAttachmentUsingSoap/SendingFileAsAttachmentUsingSoap.wsdl.
+Parsing wsdl binding {http://www.example.org/SendingFileAsAttachmentUsingSoap/}SendingFileAsAttachmentUsingSoapSOAP.
+Parsing wsdl binding input NewOperation.
+Parsing wsdl binding output NewOperation.
+Processing doc style for operation NewOperation.
+Populating WSDL schema SendingFileAsAttachmentUsingSoap.xsd.
+Creating file SendingFileAsAttachmentUsingSoap.xsd in the workspace.
+Copying source WSDL SendingFileAsAttachmentUsingSoap.wsdl to SendingFileAsAttachmentUsingSoap.wsdl.
+
+Elapsed time processing this message definition file: 0.288 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

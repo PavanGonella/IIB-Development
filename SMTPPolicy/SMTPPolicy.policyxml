@@ -2,7 +2,7 @@
 <policies>
   <policy policyType="SMTP" policyName="SMTPPolicy" policyTemplate="SMTP">
     <smtpServer>mail.eidiko-india.com:587</smtpServer>
-    <securityIdentity>secid</securityIdentity>
+    <securityIdentity>email587</securityIdentity>
     <starttlsEnable>false</starttlsEnable>
     <starttlsRequired>false</starttlsRequired>
   </policy>
