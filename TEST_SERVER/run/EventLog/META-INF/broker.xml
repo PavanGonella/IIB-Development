@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Broker deployBarfile="C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\GeneratedBarFiles\EventLogproject.generated.bar" deployTimestamp="2024-09-12 16:48:26">
+  <CompiledApplication>
+    <ConfigurableProperty uri="startMode">
+    </ConfigurableProperty>
+  </CompiledApplication>
+  <CompiledMessageFlow name="EventLog" deployBarfile="C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\GeneratedBarFiles\EventLogproject.generated.bar" deployTimestamp="2024-09-12 16:48:26">
+    <ConfigurableProperty uri="EventLog#Compute.connectDatasourceBeforeFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#Compute.dataSource">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#Compute.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.URLSpecifier" override="/log">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.decompressInputMessage">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.faultFormat">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.timeoutForClient">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.useHTTPS">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Input.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Reply.compressionType">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#HTTP Reply.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#additionalInstances">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#commitCount">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#commitInterval">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#consumerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#consumerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#coordinatedTransaction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#maximumRateMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#monitoringProfile">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#notificationThresholdMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#processingTimeoutAction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#processingTimeoutSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#providerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#providerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#startInstancesWhenFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#startMode">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="EventLog#wlmPolicy">
+    </ConfigurableProperty>
+  </CompiledMessageFlow>
+</Broker>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy:Deploy xmlns:deploy="http://www.ibm.com/xmlns/prod/wmb/deploy/6.0.0" overrideConfigurableProperties="false" includeESQL="false">
+  <deployables>
+    <deployable deployed="true" barResourceTimeStamp="1725404875999" workspaceResource="/EventLog/EventLog.msgflow">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file EventLog\EventLog.msgflow.&#xA;Successfully added file EventLog\EventLog.msgflow to BAR file.&#xA;" severity="0"/>
+      <barEntry name="EventLog.msgflow"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1726159700398" workspaceResource="/EventLog/EventLog_mfCompute.esql">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file EventLog\EventLog_mfCompute.esql.&#xA;Successfully added file EventLog\EventLog_mfCompute.esql to BAR file.&#xA;" severity="0"/>
+      <barEntry name="EventLog_mfCompute.esql"/>
+    </deployable>
+    <deployable deployed="true" barResourceTimeStamp="1725402003255" workspaceResource="/EventLog/application.descriptor">
+      <deployableStatus code="0" key="DEPLOYABLE_LAST_COMPILE_STATUS" message="&#xA;Processing file EventLog\application.descriptor.&#xA;Successfully added file EventLog\application.descriptor to BAR file.&#xA;Elapsed time: 0.001 second(s).&#xA;&#xA;Successfully added file EventLog\application.descriptor to BAR file.&#xA;" severity="0"/>
+      <barEntry name="application.descriptor"/>
+    </deployable>
+  </deployables>
+</deploy:Deploy>

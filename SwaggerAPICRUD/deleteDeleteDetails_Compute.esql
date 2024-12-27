@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE deleteDeleteDetails_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.XMLNSC.Employee.Details.Id;
+		DECLARE query CHARACTER 'DELETE FROM EMPLOYEES_DATA WHERE ID=?';
+		PASSTHRU(query,var);
+		SET OutputRoot.JSON.Data.Messgae = 'Record with Id :' || var ||' has been deleted sucesfully';
+		RETURN TRUE;
+	END;
+	
+END MODULE;
