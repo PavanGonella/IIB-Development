@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE deleteDELETE_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE InRef INTEGER InputLocalEnvironment.REST.Input.Parameters.id;
+		DELETE FROM Database.sarasu.system.CUSTOMERS AS t WHERE t.id=InRef;
+		
+		SET OutputRoot.JSON.Data.Message = 'Data Deleted sucessfully';
+		RETURN TRUE;
+	END;
+
+END MODULE;

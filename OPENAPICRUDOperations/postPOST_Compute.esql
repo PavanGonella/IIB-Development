@@ -1,0 +1,14 @@
+
+
+CREATE COMPUTE MODULE postPOST_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	 	DECLARE InRefName CHARACTER InputLocalEnvironment.REST.Input.Parameters.name;
+	 	DECLARE InRefId INTEGER InputLocalEnvironment.REST.Input.Parameters.id;
+	 	UPDATE Database.CUSTOMERS AS t SET name= InRefName WHERE t.id = InRefId;
+	 	SET OutputRoot.JSON.Data.Message = 'Data updated sucessfully';
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

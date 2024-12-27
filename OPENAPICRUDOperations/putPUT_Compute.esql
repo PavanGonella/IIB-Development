@@ -1,0 +1,19 @@
+
+
+CREATE COMPUTE MODULE putPUT_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE InRefId INTEGER InputLocalEnvironment.HTTP.Input.QueryString.id;
+		DECLARE InRefFirstname CHARACTER InputLocalEnvironment.HTTP.Input.QueryString.firstname;
+		DECLARE InRefLastname CHARACTER InputLocalEnvironment.HTTP.Input.QueryString.lastname;
+		DECLARE InRefAge INTEGER InputLocalEnvironment.HTTP.Input.QueryString.age;
+		DECLARE InRefPhoneno INTEGER InputLocalEnvironment.HTTP.Input.QueryString.phoneno;
+		
+		INSERT INTO Database.CUSTOMERS(ID,FIRSTNAME,LASTNAME,AGE,PHONENO)VALUES(InRefId,InRefFirstname,InRefLastname,InRefAge,InRefPhoneno);
+		SET OutputRoot.JSON.Data.Message = 'Data inserted sucessfully';
+		
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

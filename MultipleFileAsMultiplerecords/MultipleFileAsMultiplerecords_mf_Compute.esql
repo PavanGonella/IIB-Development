@@ -1,0 +1,28 @@
+
+
+CREATE COMPUTE MODULE MultipleFileAsMultiplerecords_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE i INTEGER 1;
+		DECLARE Inref REFERENCE TO InputRoot.XMLNSC.breakfast_menu.food;
+		DECLARE dataRef,breakfastRef,foodRef REFERENCE TO OutputRoot.JSON.Data;
+		WHILE LASTMOVE(Inref) DO
+			CREATE LASTCHILD OF OutputRoot.JSON AS dataRef NAME 'Data';
+			CREATE LASTCHILD OF dataRef AS breakfastRef NAME 'breakfast_menu';
+			CREATE LASTCHILD OF breakfastRef AS foodRef NAME 'food';
+			
+			SET foodRef.NAME = Inref.NAME;
+			SET foodRef.PRICE = Inref.PRICE;
+			SET foodRef.DESCRIPTION = Inref.DESCRIPTION;
+			SET foodRef.CALORIES = Inref.CALORIES;
+			
+			SET OutputLocalEnvironment.Destination.File.Name = 'File '||CAST(i  AS CHARACTER);
+			SET i = i + 1; 
+			MOVE Inref NEXTSIBLING;
+		END WHILE;
+		
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

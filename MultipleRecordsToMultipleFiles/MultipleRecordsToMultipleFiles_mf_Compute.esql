@@ -1,0 +1,17 @@
+
+CREATE COMPUTE MODULE MultipleRecordsToMultipleFiles_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.XMLNSC.breakfast_menu.food;
+		DECLARE i INTEGER 1;
+		FOR var2 AS InputRoot.XMLNSC.breakfast_menu.food[] DO
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.breakfast_menu.food NAME 'name' VALUE var.name;
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.breakfast_menu.food NAME 'price' VALUE var.price;
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.breakfast_menu.food NAME 'description' VALUE var.description;
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.breakfast_menu.food NAME 'calories' VALUE var.calories;
+			SET OutputLocalEnvironment.Destination.File.Name = 'File:'||CAST(i AS CHARACTER CCSID 1208)||'.txt';
+			SET i = i + 1;
+		END FOR;
+		RETURN TRUE;
+	END;
+END MODULE;

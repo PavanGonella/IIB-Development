@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OPENAPICRUDOperations",
+    "version": "1.0.0",
+    "description": "OPENAPICRUDOperations"
+  },
+  "servers": [
+    {
+      "url": "/openapicrudoperations/v1"
+    }
+  ],
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/GET": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/PUT": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/DELETE": {
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/POST": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    }
+  }
+}

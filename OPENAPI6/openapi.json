@@ -1,0 +1,27 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OPENAPI6",
+    "version": "1.0.0",
+    "description": "OPENAPI6"
+  },
+  "servers": [
+    {
+      "url": "/openapi6/v1"
+    }
+  ],
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/getid": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    }
+  }
+}
