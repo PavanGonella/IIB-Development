@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <input path="/XMLTestData.xsd"/>
+    <output path="/XMLTestData.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="DeleteDBRecordsUsingMappingNode_mf_Mapping">
+        <input path="mb:msg(customers,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_customers"/>
+        <output path="mb:msg(customers,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_customers1"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_customers/Properties"/>
+            <output path="$ComIbmMessageAssembly_customers1/Properties"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

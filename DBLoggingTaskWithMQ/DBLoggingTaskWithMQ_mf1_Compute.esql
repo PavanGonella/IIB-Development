@@ -1,0 +1,31 @@
+
+
+CREATE COMPUTE MODULE DBLoggingTaskWithMQ_mf1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL ProcessRequest();
+		RETURN FALSE;
+	END;
+CREATE PROCEDURE ProcessRequest() BEGIN
+	DECLARE EnvVar REFERENCE TO Environment.Variables;
+	SET EnvVar.ReqId = InputRoot.JSON.Data.Details.RequestIdentifier; 
+
+	CALL PayloadLogging('Request',ASBITSTREAM(InputRoot.JSON.Data));
+	SET EnvVar.root = OutputRoot;
+	SET OutputRoot.XMLNSC.root = EnvVar.root;
+	CALL PayloadLogging('Reponse',ASBITSTREAM(InputRoot.JSON.Data));
+	PROPAGATE TO TERMINAL 'out1';
+	
+	END;
+CREATE PROCEDURE PayloadLogging(IN PayLoadType CHARACTER, IN Payload BLOB) BEGIN
+	SET OutputRoot = NULL;
+	DECLARE Env REFERENCE TO Environment.Variables;
+	SET OutputRoot.MQMD.Format = MQFMT_RF_HEADER_2;
+	SET OutputRoot.MQRFH2.usr.ReqId = Env.ReqId;
+	SET OutputRoot.MQRFH2.usr.PayLoadType = PayLoadType;
+	SET OutputRoot.MQRFH2.usr.Payload = Payload;
+	PROPAGATE TO TERMINAL 'out';
+	SET OutputRoot = NULL;
+END;
+
+END MODULE;

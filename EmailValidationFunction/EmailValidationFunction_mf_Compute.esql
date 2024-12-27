@@ -1,0 +1,15 @@
+
+
+CREATE COMPUTE MODULE EmailValidationFunction_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+			RETURN TRUE;
+	END;
+END MODULE;
+CREATE PROCEDURE EmailValidate (IN email CHARACTER, OUT isValid BOOLEAN)
+BEGIN
+	DECLARE query CHARACTER; 
+	SET query = PASSTHRU('SELECT CASE WHEN ? REGEXP ''^[a-z0-9.-_]+@[a-z.-]+\.[a-z]{2,}$'' TH;
+	SET isValid = REGEXP_LIKE(email, regExp);
+	
+END;

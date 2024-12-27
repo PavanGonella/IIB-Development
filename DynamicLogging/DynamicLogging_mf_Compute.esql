@@ -1,0 +1,42 @@
+DECLARE var1 SHARED INTEGER 1;
+
+CREATE COMPUTE MODULE DynamicLogging_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		
+		 CALL CopyEntireMessage();
+		
+----		 PROPAGATE TO TERMINAL 'out1';
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot.DFDL.DynLog.body.body_elem1=' : '||ApplicationLabel;
+		SET OutputRoot.DFDL.DynLog.body.body_elem2=' : ';--|MessageFlowLabel;
+		SET OutputRoot.DFDL.DynLog.body.body_elem3=' : '||NodeLabel;
+		SET OutputRoot.DFDL.DynLog.body.body_elem4=' : '||ExecutionGroupLabel;
+		SET OutputRoot.DFDL.DynLog.body.body_elem5 = 'NULL';
+		SET OutputRoot.DFDL.DynLog.body.body_elem6=' : '||CAST(var1 AS CHARACTER);
+		SET OutputRoot.DFDL.DynLog.body.body_elem7=' : '||CAST(CURRENT_TIMESTAMP AS CHARACTER);
+		SET OutputRoot.DFDL.DynLog.body.body_elem8=' : ';--||CAST(InputRoot.XMLNSC AS CHARACTER);
+		SET OutputRoot.DFDL.DynLog.body.body_elem9=' : '||CAST(CURRENT_TIMESTAMP AS CHARACTER);
+		SET OutputRoot.DFDL.DynLog.body.body_elem10=' : ';--||CAST(OutputRoot.JSON.Data AS CHARACTER);
+		
+		SET OutputLocalEnvironment.Destination.File.Name = 'AuditLog_'||CAST(CURRENT_DATE AS CHARACTER FORMAT 'dd-MM-yy');
+		SET var1 = var1 + 1;
+		PROPAGATE TO TERMINAL 'out1';
+		
+		 SET OutputRoot.JSON.Data = InputRoot.XMLNSC;
+	END;
+END MODULE;

@@ -1,0 +1,30 @@
+
+CREATE COMPUTE MODULE DBInsertOperationUsingODBC_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		  -- Declare variables to hold input values
+		DECLARE SQLQuery CHARACTER 'INSERT INTO Database.CUSTOMERS(ID, FIRSTNAME, LASTNAME, AGE, PHONENO, ACCOUNT_NUMBER)';
+        DECLARE customerID CHARACTER;
+        DECLARE firstName CHARACTER;
+        DECLARE lastName CHARACTER;
+        DECLARE age INTEGER;
+        DECLARE phoneNo CHARACTER;
+        DECLARE accountNo CHARACTER;
+
+        -- Extract values from the incoming message
+        SET customerID = InputRoot.XMLNSC.operation.id;
+        SET firstName = InputRoot.XMLNSC.operation.firstname;
+        SET lastName = InputRoot.XMLNSC.operation.lastname;
+        SET age = InputRoot.XMLNSC.operation.age;
+        SET phoneNo = InputRoot.XMLNSC.operation.phoneno;
+        SET accountNo = InputRoot.XMLNSC.operation.accountno;
+
+        -- Construct the SQL INSERT statement
+        SET OutputRoot.XMLNSC.Query.Result = PASSTHRU(SQLQuery,customerID, firstName, lastName, age, phoneNo, accountNo);
+        
+		
+		RETURN TRUE;
+	END;
+
+
+END MODULE;
