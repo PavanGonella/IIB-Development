@@ -1,0 +1,15 @@
+
+
+CREATE COMPUTE MODULE HTTPTimeout_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Set the HTTP response status code to 504 (Gateway Timeout) 
+		SET OutputRoot.HTTPResponseHeader."Content-Type" = 'text/plain'; 
+		SET OutputRoot.HTTPResponseHeader."Status-Code" = '504'; 
+		SET OutputRoot.HTTPResponseHeader."Status-Reason" = 'Gateway Timeout'; 
+		-- Set the response message 
+		SET OutputRoot.BLOB.BLOB = CAST('Request timed out' AS BLOB CCSID InputRoot.Properties.CodedCharSetId);
+	END;
+
+	
+END MODULE;

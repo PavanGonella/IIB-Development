@@ -1,0 +1,35 @@
+DECLARE ns NAMESPACE 'http://www.example.org/InsertOpeartionUsingSOAP/';
+
+
+CREATE COMPUTE MODULE InsertOpeartionUsingSOAP_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		   CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		
+		DECLARE id,firstname,lastname,age,phoneno,accountno CHARACTER;
+		SET id = InputRoot.SOAP.Body.ns:NewOperation.id;
+		SET firstname = InputRoot.SOAP.Body.ns:NewOperation.firstname;
+		SET lastname = InputRoot.SOAP.Body.ns:NewOperation.lastname;
+		SET age = InputRoot.SOAP.Body.ns:NewOperation.age;
+		SET phoneno= InputRoot.SOAP.Body.ns:NewOperation.phoneno;
+		SET accountno = InputRoot.SOAP.Body.ns:NewOperation.accountno;
+		INSERT INTO Database.CUSTOMERS(ID,FIRSTNAME,LASTNAME,AGE,PHONENO,ACCOUNT_NUMBER) VALUES(id,firstname,lastname,age,phoneno,accountno);
+        SET OutputRoot.SOAP.Body.ns:NewOperationResponse.out ='Data Inserted sucessfully,..The vaules are '||id||' '||firstname||' '||lastname||' '||age||' '||phoneno||' '||accountno;		
+        SET OutputLocalEnvironment.SOAP.Input.Transport.HTTP.MaxClientWaitTime = 10; 
+	END;
+END MODULE;

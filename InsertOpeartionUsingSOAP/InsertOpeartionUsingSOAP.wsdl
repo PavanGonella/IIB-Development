@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/InsertOpeartionUsingSOAP/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="InsertOpeartionUsingSOAP" targetNamespace="http://www.example.org/InsertOpeartionUsingSOAP/">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="InsertOpeartionUsingSOAP_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="InsertOpeartionUsingSOAPSOAP" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+    
+  <wsdl:types>
+        
+          
+    <xsd:schema xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" targetNamespace="http://www.example.org/InsertOpeartionUsingSOAP/">
+      
+      <xsd:include schemaLocation="InsertOpeartionUsingSOAP_InlineSchema1.xsd"/>
+    </xsd:schema>
+        
+  </wsdl:types>
+    
+  <wsdl:message name="NewOperationRequest">
+        
+    <wsdl:part element="tns:NewOperation" name="parameters"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="NewOperationResponse">
+        
+    <wsdl:part element="tns:NewOperationResponse" name="parameters"/>
+      
+  </wsdl:message>
+    
+  <wsdl:portType name="InsertOpeartionUsingSOAP">
+        
+    <wsdl:operation name="NewOperation">
+            
+      <wsdl:input message="tns:NewOperationRequest"/>
+            
+      <wsdl:output message="tns:NewOperationResponse"/>
+          
+    </wsdl:operation>
+      
+  </wsdl:portType>
+    
+  <wsdl:binding name="InsertOpeartionUsingSOAPSOAP" type="tns:InsertOpeartionUsingSOAP">
+        
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+    <wsdl:operation name="NewOperation">
+            
+      <soap:operation soapAction="http://www.example.org/InsertOpeartionUsingSOAP/NewOperation"/>
+            
+      <wsdl:input>
+                
+        <soap:body use="literal"/>
+              
+      </wsdl:input>
+            
+      <wsdl:output>
+                
+        <soap:body use="literal"/>
+              
+      </wsdl:output>
+          
+    </wsdl:operation>
+      
+  </wsdl:binding>
+    
+  <wsdl:service name="InsertOpeartionUsingSOAP">
+        
+    <wsdl:port binding="tns:InsertOpeartionUsingSOAPSOAP" name="InsertOpeartionUsingSOAPSOAP">
+            
+      <soap:address location="http://localhost:7800/path"/>
+          
+    </wsdl:port>
+      
+  </wsdl:service>
+  
+</wsdl:definitions>

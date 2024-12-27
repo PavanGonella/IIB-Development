@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+  <policy policyType="HTTPRequest" policyName="HTTPPolicy" policyTemplate="HTTPRequest">
+    <apiKeyLocation></apiKeyLocation>
+    <apiKeyName></apiKeyName>
+    <acceptSelfSignedCerts>false</acceptSelfSignedCerts>
+    <credentialName></credentialName>
+    <endpointURL>http://localhost:7800/policy3</endpointURL>
+  </policy>
+</policies>
