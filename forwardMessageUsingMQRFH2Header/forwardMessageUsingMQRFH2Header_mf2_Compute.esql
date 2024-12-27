@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE forwardMessageUsingMQRFH2Header_mf2_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	    DECLARE myBlob BLOB ;
+	     SET myBlob = InputRoot.MQRFH2.usr.id;
+	     SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier = myBlob;
+	     SET OutputRoot.JSON.Data = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+
+END MODULE;

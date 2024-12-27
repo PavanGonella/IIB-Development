@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE forwardMessageUsingMQRFH2Header_mf1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+		SET OutputRoot.MQRFH2.usr.id = var;
+		SET OutputRoot.XMLNSC.Result.Data = 'Eidiko Systems Integrators';
+		RETURN TRUE;
+	END;
+END MODULE;

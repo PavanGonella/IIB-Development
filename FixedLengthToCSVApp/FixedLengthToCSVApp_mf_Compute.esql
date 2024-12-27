@@ -1,0 +1,22 @@
+
+
+CREATE COMPUTE MODULE FixedLengthToCSVApp_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.DFDL.Fixed.body[1];
+		DECLARE i INTEGER 1;
+		SET OutputRoot.DFDL.CSV.header.head_field1 = InputRoot.DFDL.Fixed.header.head_elem1;
+		SET OutputRoot.DFDL.CSV.header.head_field2 = InputRoot.DFDL.Fixed.header.head_elem2;
+		SET OutputRoot.DFDL.CSV.header.head_field3 = InputRoot.DFDL.Fixed.header.head_elem3;
+		SET OutputRoot.DFDL.CSV.header.head_field4 = InputRoot.DFDL.Fixed.header.head_elem4;
+		WHILE LASTMOVE(var) DO
+			SET OutputRoot.DFDL.CSV.record[i].field1= InputRoot.DFDL.Fixed.body[i].body_elem1;
+			SET OutputRoot.DFDL.CSV.record[i].field2= InputRoot.DFDL.Fixed.body[i].body_elem2;
+			SET OutputRoot.DFDL.CSV.record[i].field3= InputRoot.DFDL.Fixed.body[i].body_elem3;
+			SET OutputRoot.DFDL.CSV.record[i].field4= InputRoot.DFDL.Fixed.body[i].body_elem4;
+			SET i = i + 1;
+			MOVE var NEXTSIBLING;
+		END WHILE;		
+		RETURN TRUE;
+	END;
+END MODULE;
