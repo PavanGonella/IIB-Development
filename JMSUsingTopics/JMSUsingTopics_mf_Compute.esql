@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE JMSUsingTopics_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.result.data =  InputRoot.XMLNSC.*;
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

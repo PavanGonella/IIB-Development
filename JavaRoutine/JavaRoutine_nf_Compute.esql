@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE JavaRoutine_nf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN 
+		DECLARE s INTEGER;
+		CALL addition('a','b')INTO s;
+	    SET OutputRoot.JSON.Data.Result = s;
+		RETURN TRUE;
+	END;
+
+END MODULE;
+CREATE PROCEDURE addition(IN a CHARACTER, IN b CHARACTER) 
+RETURNS CHARACTER
+LANGUAGE JAVA
+EXTERNAL NAME "com.java.routine.Myclass.add";

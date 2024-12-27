@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE JMSMQTransform_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.result.data = InputRoot.XMLNSC.input.data; 
+		RETURN TRUE;
+	END;
+
+END MODULE;
