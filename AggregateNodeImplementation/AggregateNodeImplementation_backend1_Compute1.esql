@@ -1,0 +1,15 @@
+
+
+
+CREATE COMPUTE MODULE AggregateNodeImplementation_backend1_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE AccNo INTEGER InputRoot.XMLNSC.customer.account.accountno;
+		SET Environment.data[] = PASSTHRU('SELECT * FROM CUSTOMER_ACCOUNT_DETAILS WHERE ACCOUNT_NUMBER=?'VALUES(AccNo));
+		SET OutputRoot.XMLNSC.Account.Details[] = Environment.data[];
+		
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

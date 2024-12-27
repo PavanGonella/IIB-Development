@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE AggregateNodeImplementation_backend2_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE InRef REFERENCE TO InputRoot.ComIbmAggregateReplyBody.f1.XMLNSC;
+		DECLARE InRef2 REFERENCE TO InputRoot.ComIbmAggregateRepltNode.f2.XMLNSC;
+		SET OutputRoot.JSON.Data.Customer.Detatils = InRef;
+		SET OutputRoot.JSON.Data.Customer.Account= InRef2;
+		RETURN TRUE;
+	END;
+
+END MODULE;

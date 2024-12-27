@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE App_MessageModel_CSV_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		SET OutputRoot.XMLNSC.employees=InputRoot.DFDL;
+		
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

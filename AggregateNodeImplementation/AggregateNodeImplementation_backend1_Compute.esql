@@ -1,0 +1,13 @@
+
+CREATE COMPUTE MODULE  AggregateNodeImplementation_backend1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ID INTEGER InputRoot.XMLNSC.customers.details.Id;
+        SET Environment.data[] = PASSTHRU('SELECT * FROM CUSTOMERS WHERE CUSTOMERS.Id=?'VALUES(ID));
+        SET OutputRoot.XMLNSC.Customer.Details[] = Environment.data[];
+	
+		RETURN TRUE;
+	END;
+
+END MODULE;
+

@@ -1,0 +1,14 @@
+
+
+CREATE COMPUTE MODULE Backend_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.data.flight.details.name = 'Indigo';
+		SET OutputRoot.XMLNSC.data.flight.details.category = 'Domestic';
+		SET OutputRoot.XMLNSC.data.flight.details.source = 'Delhi';
+		SET OutputRoot.XMLNSC.data.flight.details.destination = 'Hyderabad';
+		RETURN TRUE;
+	END;
+
+
+END MODULE;
