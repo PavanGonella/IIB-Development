@@ -1,0 +1,17 @@
+
+
+CREATE COMPUTE MODULE PublicationSubscription_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.MQRFH2.Version = 2;
+		SET OutputRoot.MQRFH2.Format = MQFMT_NONE;
+		SET OutputRoot.MQRFH2.psc.Command = 'Publish';
+		SET OutputRoot.MQRFH2.psc.Topic = 'IIB';
+		SET OutputRoot.MQRFH2.psc.PubOpt = 'Local';
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+
+
+END MODULE;
