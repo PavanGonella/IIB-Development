@@ -142,7 +142,7 @@ ActivityLog:
   # Copy and customize the ActivityLogTemplate section for each Activity Log output configuration that you want to create.
   # Rename the section title 'ActivityLogTemplate' to be the name of your Activity Log output configuration. This name must be unique.
   #ActivityLogTemplate:
-    #enabled: true                    # The Enabled property defines whether the Activity Log output configuration is in effect. If it is set to false then the output configuration values will be ignored, default is true.
+    enabled: true                    # The Enabled property defines whether the Activity Log output configuration is in effect. If it is set to false then the output configuration values will be ignored, default is true.
     #filter: 'RM=JMS'                # The Tag filter property defines a string value consisting of name-value pairs delimited by semi-colons that are used to filter what is written to the configured activity log outputs.
                                        # For example RM=JMS;MSGFLOW=myflow
     #minSeverityLevel: INFO           # The Minimum severity of log entries property defines a string value to specify the minimum severity level of messages written to the configured activity Log outputs.
@@ -154,8 +154,8 @@ ActivityLog:
     #maxAgeMins: 0                    # Maximum age of log files (minutes)
     #maxFileSizeMb: 25                # Maximum log file size (MB)
     #formatEntries: false             # Sets whether the formatted messages are written to the output file, default is false.
-    #consoleLog: false                # Control writing activity log messages to standard out. Set to true or false, default is false.
-    #consoleLogFormat: 'text'         # Control the format of activity log messages written to standard out. Set to idText, text or ibmjson, default is text if unset.
+    consoleLog: false                # Control writing activity log messages to standard out. Set to true or false, default is false.
+    consoleLogFormat: 'text'         # Control the format of activity log messages written to standard out. Set to idText, text or ibmjson, default is text if unset.
     #additionalJsonElements: '"name1": "value1", "name2": "value2"'    # When the consoleLogFormat is set to ibmjson the specified json elements are added to the root of the logging object
 
 RestAdminAPI:
