@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <input path="/XMLTestData.xsd" var="var"/>
+    <input path="jar:file://!com/ibm/msl/mapping/rdb/xsds/dbreturn.xsd" var="var1"/>
+    <output path="/XMLTestData.xsd" var="var2"/>
+    <output path="db:table(/xe.dbm,xe,SYSTEM,CUSTOMERS)" var="CUSTOMERS"/>
+    <namespaces>
+        <namespace kind="extension" prefix="xs" uri="http://www.w3.org/2001/XMLSchema"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="CRUDOpeartionsUsingMapingNode_mf_Mapping">
+        <input path="$var/mb:msg(customers,assembly,DataObject,Properties)" var="ComIbmMessageAssembly_customers"/>
+        <output path="$var2/mb:msg(customers,assembly,DataObject,Properties)" var="ComIbmMessageAssembly_customers1"/>
+        <output path="$CUSTOMERS/db:insert(fn:false(),ID,FIRSTNAME,LASTNAME,AGE,DOB,PHONENO)" var="dbinsert"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_customers/Properties"/>
+            <output path="$ComIbmMessageAssembly_customers1/Properties"/>
+        </move>
+        <transaction>
+            <insert ref="dbinsert">
+                <input path="$ComIbmMessageAssembly_customers/customers"/>
+                <output path="$dbinsert/."/>
+                <move>
+                    <input path="id" var="id"/>
+                    <output path="ID"/>
+                </move>
+                <move automap="true">
+                    <input path="firstname"/>
+                    <output path="FIRSTNAME"/>
+                </move>
+                <move automap="true">
+                    <input path="lastname"/>
+                    <output path="LASTNAME"/>
+                </move>
+                <move>
+                    <input path="age" var="age"/>
+                    <output path="AGE"/>
+                </move>
+                <move>
+                    <input path="dob" var="dob"/>
+                    <output path="DOB" var="DOB"/>
+                </move>
+                <move>
+                    <input path="phoneno" var="phoneno"/>
+                    <output path="PHONENO"/>
+                </move>
+            </insert>
+            <return>
+                <input path="$var1/DBInsertReturn"/>
+                <output path="$ComIbmMessageAssembly_customers1/customers"/>
+                <move>
+                    <input path="NumberOfRowsInserted"/>
+                    <output path="id"/>
+                </move>
+            </return>
+        </transaction>
+    </mappingDeclaration>
+</mappingRoot>

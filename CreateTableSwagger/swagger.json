@@ -1,0 +1,26 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "CreateTableSwagger",
+    "version" : "1.0.0",
+    "description" : "CreateTableSwagger"
+  },
+  "paths" : {
+    "/CreateTableSwagger" : {
+      "get" : {
+        "operationId" : "getCreateTableSwagger",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve CreateTableSwagger"
+      }
+    }
+  },
+  "basePath" : "/createtableswagger/v1"
+}

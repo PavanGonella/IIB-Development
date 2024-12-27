@@ -1,0 +1,18 @@
+
+
+CREATE COMPUTE MODULE CheckDatabaseConnectivity_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE query CHARACTER 'SELECT * FROM CUSTOMERS';
+		
+--		IF connectivityStatus = 0 THEN
+--			SET OutputRoot.XMLNSC.connectivity.status = 'active';
+--		ELSE
+--			SET OutputRoot.XMLNSC.connectivity.status = 'inactive';
+--		END IF;	
+		SET OutputRoot.XMLNSC.message.status = SQLERRORTEXT;
+		RETURN TRUE;
+	END;
+
+
+END MODULE;

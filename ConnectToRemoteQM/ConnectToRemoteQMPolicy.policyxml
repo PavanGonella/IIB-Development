@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+  <policy policyType="MQEndpoint" policyName="ConnectToRemoteQMPolicy" policyTemplate="">
+    <connection>CLIENT</connection>
+    <destinationQueueManagerName>qmgrt2</destinationQueueManagerName>
+    <queueManagerHostname>192.168.1.57</queueManagerHostname>
+    <listenerPortNumber>1434</listenerPortNumber>
+    <channelName>192.168.1.57(1434)</channelName>
+    <CCDTUrl></CCDTUrl>
+    <securityIdentity></securityIdentity>
+    <useSSL>false</useSSL>
+    <SSLPeerName></SSLPeerName>
+    <SSLCipherSpec></SSLCipherSpec>
+    <SSLCertificateLabel></SSLCertificateLabel>
+    <MQApplName></MQApplName>
+    <reconnectOption>default</reconnectOption>
+  </policy>
+</policies>

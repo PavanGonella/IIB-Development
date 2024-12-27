@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE COALESCEfunction_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	     DECLARE var REFERENCE TO InputRoot.XMLNSC.Address.Street;
+	     
+	     SET OutputRoot.JSON.Data.Result = COALESCE(var,'Not Found!');
+		RETURN TRUE;
+	END;
+END MODULE;
