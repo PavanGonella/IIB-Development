@@ -1,0 +1,345 @@
+
+
+BROKER SCHEMA com.dashenbank.accountsummary
+PATH com.dashenbank.genericfunctions;
+
+-- DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+DECLARE ns NAMESPACE 'http://fcubs.ofss.com/service/FCUBSAccService';
+
+DECLARE log4j_config_path, log4j_error_msg, backend_url, logger_name, log_type EXTERNAL CHARACTER;
+DECLARE consoleLog_enable EXTERNAL BOOLEAN;
+--------------Global variables--------
+DECLARE rc BOOLEAN TRUE;
+-------------------------------------
+CREATE COMPUTE MODULE RequestToFlexcube
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		--CALL initLog4j(log4j_config_path) INTO rc;
+		IF ( rc = TRUE ) THEN
+			CALL GenerateReqToBackend();
+		ELSE
+			SET OutputRoot.XMLNSC.Log.Message = log4j_error_msg;
+		END IF;
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE GenerateReqToBackend() BEGIN
+		SET Environment.domainDataRef = InputRoot.SOAP;
+		DECLARE ccidRef, encodeRef INTEGER;
+		DECLARE envRef REFERENCE TO Environment.Variables;
+		CREATE LASTCHILD OF Environment AS envRef NAME 'Variables';
+
+		SET ccidRef = InputRoot.Properties.CodedCharSetId;
+		SET encodeRef = InputRoot.Properties.Encoding;
+		SET envRef.encoding = encodeRef;
+		SET envRef.codedCharSetId = ccidRef;
+		DECLARE domainDataRef REFERENCE TO InputRoot.SOAP;
+		DECLARE domainName CHARACTER FIELDNAME(InputBody);
+
+		SET envRef.requestIdentifier = CAST(InputLocalEnvironment.Destination.CallableFlow.Reply.ReplyIdentifier AS CHARACTER);
+		SET envRef.replyIdentifier = InputLocalEnvironment.Destination.CallableFlow.Reply.ReplyIdentifier;
+		SET Environment.reqPayload = getPayLoad(domainName,domainDataRef,encodeRef,ccidRef);
+		SET envRef.id = InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_HEADER.*:MSGID;
+		SET envRef.source = InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_HEADER.*:SOURCE;
+		SET envRef.service = InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_HEADER.*:SERVICE;
+		SET envRef.operation = InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_HEADER.*:OPERATION;
+	    SET envRef.Created_By=InputRoot.HTTPInputHeader.Host ||' '||'ACE USER';
+		----------------------Request Logging-------------------------
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		 DECLARE OutRef REFERENCE TO OutputRoot.XMLNSC;
+		-- CALL PayloadLogging(envRef.id,Environment.reqPayload,'Channel_Request',ApplicationLabel,envRef.source,envRef.service,envRef.operation,OutRef);
+		 CALL PayloadLogging(envRef.id,Environment.reqPayload,'Channel_Request',ApplicationLabel,envRef.source,envRef.service,envRef.operation,envRef.Created_By,OutRef);
+		 IF consoleLog_enable=TRUE THEN
+		 LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('AccountSummaryChannel_Request : '||Environment.reqPayload);	
+		 END IF;
+		 
+--		CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'**********************************************************************') INTO rc;
+--		CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' ------ CHANNEL_REQ ------') INTO rc;
+--		CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'CHANNEL_REQ data is: '||Environment.reqPayload) INTO rc;
+--		CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' -----------------------------------------------------------------------') INTO rc;
+		-------------- Generating request to Backend -------------
+		DECLARE inputHeaderRef REFERENCE TO InputRoot.SOAP.*:Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_HEADER;
+		DECLARE inputBodyRef REFERENCE TO InputRoot.SOAP.*:Body.*:QUERYACCSUMM_IOFS_REQ.*:FCUBS_BODY;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'SOAP';
+
+		SET OutputRoot.SOAP.Context = InputRoot.SOAP.Context;
+
+		CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
+		CREATE LASTCHILD OF OutputRoot.SOAP.Body NAMESPACE ns NAME 'QUERYACCSUMM_IOFS_REQ';
+		CREATE LASTCHILD OF OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_REQ NAMESPACE ns NAME 'FCUBS_HEADER';
+		CREATE LASTCHILD OF OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_REQ NAMESPACE ns NAME 'FCUBS_BODY';
+
+		DECLARE outputHeaderRef REFERENCE TO OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_REQ.ns:FCUBS_HEADER;
+		DECLARE outputBodyRef REFERENCE TO OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_REQ.ns:FCUBS_BODY;
+
+		    SET outputHeaderRef.ns:ACTION = inputHeaderRef.*:ACTION;
+	  	SET outputHeaderRef.ns:BRANCH = inputHeaderRef.*:BRANCH;
+		SET outputHeaderRef.ns:CORRELID = inputHeaderRef.*:CORRELID;
+		SET outputHeaderRef.ns:DESTINATION = inputHeaderRef.*:DESTINATION;
+		SET outputHeaderRef.ns:ENTITY = inputHeaderRef.*:ENTITY;
+		SET outputHeaderRef.ns:FUNCTIONID = inputHeaderRef.*:FUNCTIONID;
+		SET outputHeaderRef.ns:MODULEID = inputHeaderRef.*:MODULEID;
+		SET outputHeaderRef.ns:MSGID = inputHeaderRef.*:MSGID;
+		SET outputHeaderRef.ns:MSGSTAT = inputHeaderRef.*:MSGSTAT;
+		SET outputHeaderRef.ns:MULTITRIPID = inputHeaderRef.*:MULTITRIPID;
+		SET outputHeaderRef.ns:OPERATION = inputHeaderRef.*:OPERATION;
+		SET outputHeaderRef.ns:SERVICE = inputHeaderRef.*:SERVICE;
+		SET outputHeaderRef.ns:SOURCE = inputHeaderRef.*:SOURCE;
+		SET outputHeaderRef.ns:SOURCE_OPERATION = inputHeaderRef.*:SOURCE_OPERATION;
+		SET outputHeaderRef.ns:UBSCOMP = inputHeaderRef.*:UBSCOMP;
+		SET outputHeaderRef.ns:USERID = inputHeaderRef.*:USERID;
+
+		DECLARE I INTEGER 1;
+		DECLARE inRef REFERENCE TO inputHeaderRef.*:ADDL[>];
+		WHILE LASTMOVE(inRef) DO
+			SET outputHeaderRef.ns:ADDL[I].NAME = inRef.*:NAME;
+			SET outputHeaderRef.ns:ADDL[I].VALUE = inRef.*:VALUE;
+			SET I = I + 1;
+			MOVE inRef NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+
+		SET outputBodyRef.ns:"Stvw-Account-Sumary-IO".ns:CUST_NO = inputBodyRef.*:"Stvw-Account-Sumary-IO".*:CUST_NO;
+
+		SET Environment.outputData = OutputRoot.SOAP;
+		----------------------------------------------------
+		----------------------Response Logging-------------------------
+		MOVE domainDataRef TO OutputRoot.SOAP;
+		SET Environment.resPayload = getPayLoad(domainName,domainDataRef,encodeRef,ccidRef);
+		SET OutputRoot.SOAP = NULL;
+		 CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		 MOVE OutRef TO OutputRoot.XMLNSC;
+		-- CALL PayloadLogging(envRef.id,Environment.resPayload,'BACKEND_REQ',MessageFlowLabel,OutRef);
+          -- CALL PayloadLogging(envRef.id,Environment.reqPayload,'Host_Request',ApplicationLabel,envRef.source,envRef.service,envRef.operation,OutRef);
+           	 CALL PayloadLogging(envRef.id,Environment.reqPayload,'Host_Request',ApplicationLabel,envRef.source,envRef.service,envRef.operation,envRef.Created_By,OutRef);
+           IF consoleLog_enable=TRUE THEN
+           	LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('AccountSummaryHost_Request : '||Environment.reqPayload);
+           END IF;
+           
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.HTTPInputHeader = InputRoot.HTTPInputHeader;
+		SET OutputRoot.SOAP = Environment.outputData;
+
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' ------ BACKEND_REQ ------') INTO rc;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'BACKEND_REQ data is: '||Environment.resPayload) INTO rc;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' -----------------------------------------------------------------------') INTO rc;
+
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = backend_url;
+	END;
+END MODULE;
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE COMPUTE MODULE ResponseToFrontEnd
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL GenerateResToFrontend();
+		RETURN FALSE;
+	END;
+
+	CREATE PROCEDURE GenerateResToFrontend() BEGIN
+
+		SET Environment.domainDataRef = InputRoot.SOAP;
+		DECLARE ccidRef, encodeRef INTEGER;
+		DECLARE envRef REFERENCE TO Environment.Variables;
+
+		SET ccidRef = InputRoot.Properties.CodedCharSetId;
+		SET encodeRef = InputRoot.Properties.Encoding;
+		DECLARE domainDataRef REFERENCE TO InputRoot.SOAP;
+		DECLARE domainName CHARACTER FIELDNAME(InputBody);
+		SET Environment.reqPayload = getPayLoad(domainName,domainDataRef,encodeRef,ccidRef);
+		----------------------Request Logging-------------------------
+		 CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		DECLARE OutRef REFERENCE TO OutputRoot.XMLNSC;
+		--CALL PayloadLogging(envRef.id,Environment.reqPayload,'BAC_RESP',ApplicationLabel,OutRef);
+     -- CALL PayloadLogging(envRef.id,Environment.reqPayload,'Host_Response',ApplicationLabel,envRef.source,envRef.service,envRef.operation,OutRef);
+      CALL PayloadLogging(envRef.id,Environment.reqPayload,'Host_Response',ApplicationLabel,envRef.source,envRef.service,envRef.operation,envRef.Created_By,OutRef);
+      IF consoleLog_enable=TRUE THEN
+      	LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('AccountSummaryHost_Response : '||Environment.reqPayload);
+      END IF;
+      
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' ------- BACKEND_RESP -------') INTO rc;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'BACKEND_RESP data  is: '||Environment.reqPayload) INTO rc;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' ----------------------------------------------------------------------') INTO rc;
+		-------------- Generating response to channel ---------------
+
+		/*IF InputRoot.SOAP.*:Body.*:QUERYACCSUMM_IOFS_RES.*:FCUBS_HEADER.*:MSGSTAT IS NULL OR FIELDVALUE(InputRoot.SOAP.*:Body.*:QUERYACCSUMM_IOFS_RES.*:FCUBS_HEADER.*:MSGSTAT) IS NULL THEN
+			SET OutputRoot = InputRoot;
+
+			SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = envRef.ReplyIdentifier;
+			PROPAGATE TO TERMINAL 'out' DELETE NONE;
+		ELSE
+			SET OutputRoot.Properties = InputRoot.Properties;
+			SET OutputRoot.HTTPResponseHeader = InputRoot.HTTPResponseHeader;
+			CREATE LASTCHILD OF OutputRoot DOMAIN 'SOAP';
+
+			DECLARE inputHeaderRef REFERENCE TO InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_RES.*:FCUBS_HEADER;
+			DECLARE inputBodyRef REFERENCE TO InputRoot.SOAP.Body.*:QUERYACCSUMM_IOFS_RES.*:FCUBS_BODY;
+
+			--SET OutputRoot.SOAP.Context = InputRoot.SOAP.Context;
+
+			CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
+			--CREATE LASTCHILD OF OutputRoot.SOAP.Body  NAME 'QUERYACCSUMM_IOFS_RES' ;
+			
+			SET OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_RES.(XMLNSC.NamespaceDecl)xmlns = 'http://fcubs.ofss.com/service/FCUBSAccService'; 
+		SET OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_RES.ns:FCUBS_HEADER.ns:SOURCE = NULLIF(inputHeaderRef.*:SOURCE,'');
+			SET OutputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_RES.ns:FCUBS_HEADER.ns:UBSCOMP = NULLIF(inputHeaderRef.*:UBSCOMP,'');
+			--SET OutputRoot.SOAP.Body.QUERYACCSUMM_IOFS_RES.(XMLNSC.NamespaceDecl)xmlns:ns1 = 'http://www.w3.org/2001/XMLSchema-instance 
+			CREATE LASTCHILD OF OutputRoot.SOAP.Body.QUERYACCSUMM_IOFS_RES NAME 'FCUBS_HEADER';
+			CREATE LASTCHILD OF OutputRoot.SOAP.Body.QUERYACCSUMM_IOFS_RES NAME 'FCUBS_BODY';
+           
+			DECLARE outputheaderRef REFERENCE TO  OutputRoot.SOAP.Body.QUERYACCSUMM_IOFS_RES.FCUBS_HEADER;
+			DECLARE outputbodyRef REFERENCE TO OutputRoot.SOAP.Body.QUERYACCSUMM_IOFS_RES.FCUBS_BODY;
+			
+            SET outputheaderRef.SOURCE = NULLIF(inputHeaderRef.*:SOURCE,'');
+			SET outputheaderRef.UBSCOMP = NULLIF(inputHeaderRef.*:UBSCOMP,'');
+			SET outputheaderRef.MSGID = NULLIF(inputHeaderRef.*:MSGID,'');
+			SET outputheaderRef.CORRELID = NULLIF(inputHeaderRef.*:CORRELID,'');
+			SET outputheaderRef.USERID = NULLIF(inputHeaderRef.*:USERID,'');
+			SET outputheaderRef.ENTITY = NULLIF(inputHeaderRef.*:ENTITY,'');
+			SET outputheaderRef.BRANCH = NULLIF(inputHeaderRef.*:BRANCH,'');
+			SET outputheaderRef.MODULEID = NULLIF(inputHeaderRef.*:MODULEID,'');
+			SET outputheaderRef.SERVICE = NULLIF(inputHeaderRef.*:SERVICE,'');
+			SET outputheaderRef.OPERATION = NULLIF(inputHeaderRef.*:OPERATION,'');
+			SET outputheaderRef.SOURCE_OPERATION = NULLIF(inputHeaderRef.*:SOURCE_OPERATION,'');
+			SET outputheaderRef.SOURCE_USERID = NULLIF(inputHeaderRef.*:SOURCE_USERID,'');
+			SET outputheaderRef.DESTINATION = NULLIF(inputHeaderRef.*:DESTINATION,'');
+			SET outputheaderRef.MULTITRIPID = NULLIF(inputHeaderRef.*:MULTITRIPID,'');
+			SET outputheaderRef.FUNCTIONID = NULLIF(inputHeaderRef.*:FUNCTIONID,'');
+			SET outputheaderRef.ACTION = NULLIF(inputHeaderRef.*:ACTION,'');
+			SET outputheaderRef.MSGSTAT = NULLIF(inputHeaderRef.*:MSGSTAT,'');
+			SET outputheaderRef.SNAPSHOTID = NULLIF(inputHeaderRef.*:SNAPSHOTID,'');
+			SET outputheaderRef.PASSWORD = NULLIF(inputHeaderRef.*:PASSWORD,'');
+           
+			DECLARE I INTEGER 1;
+			DECLARE inRef REFERENCE TO inputHeaderRef.*:ADDL.*:PARAM[>];
+			WHILE LASTMOVE(inRef) DO
+				SET outputheaderRef.ADDL.PARAM[I].NAME = NULLIF(inRef.*:NAME,'');
+				SET outputheaderRef.ADDL.PARAM[I].VALUE = NULLIF(inRef.*:VALUE,'');
+				SET I = I + 1;
+				MOVE inRef NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+
+			SET outputbodyRef."Stvw-Account-Sumary-IO" = inputBodyRef.*:"Stvw-Account-Sumary-IO";
+
+			SET outputbodyRef."Stvw-Account-Sumary-Full".CUST_NO = NULLIF(inputBodyRef.*:"Stvw-Account-Sumary-Full".*:CUST_NO,'');
+            
+            DECLARE Summary CHARACTER REPLACE('Stvw-Account-Sumary --A',' ','');
+			SET Environment.Summary = Summary;
+			SET I = 1;
+			MOVE inRef TO InputRoot.SOAP.Body.ns:QUERYACCSUMM_IOFS_RES.ns:FCUBS_BODY.ns:"Stvw-Account-Sumary-Full".ns:"Stvw-Account-Sumary--A"[>];
+			WHILE LASTMOVE(inRef) DO
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].CUSTACNO = NULLIF(inRef.*:CUSTACNO,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].BRANCH_CODE = NULLIF(inRef.*:BRANCH_CODE,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].CCY = NULLIF(inRef.*:CCY,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].CURRBAL = NULLIF(inRef.*:CURRBAL,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].ACCOUNT_TYPE = NULLIF(inRef.*:ACCOUNT_TYPE,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].CUSTOMER_NAME = NULLIF(inRef.*:CUSTOMER_NAME,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].AC_DESC = NULLIF(inRef.*:AC_DESC,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].ACCOUNT_CLASS = NULLIF(inRef.*:ACCOUNT_CLASS,'');
+				SET outputbodyRef."Stvw-Account-Sumary-Full".{Environment.Summary}[I].ACCLASSDESC = NULLIF(inRef.*:ACCLASSDESC,'');
+				SET I=I+1;
+				MOVE inRef NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+
+			SET I = 1;
+			MOVE inRef TO inputBodyRef.*:FCUBS_ERROR_RESP.*:ERROR[>];
+			WHILE LASTMOVE(inRef) Do
+				SET outputbodyRef.FCUBS_ERROR_RESP.ERROR[I].ECODE = NULLIF(inRef.*:ECODE,'');
+				SET outputbodyRef.FCUBS_ERROR_RESP.ERROR[I].EDESC = NULLIF(inRef.*:EDESC,'');
+				SET I = I + 1;
+				MOVE inRef NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+
+			SET I = 1;
+			MOVE inRef TO inputBodyRef.*:FCUBS_WARNING_RESP.*:WARNING[>];
+			WHILE LASTMOVE(inRef) Do
+				SET outputbodyRef.FCUBS_WARNING_RESP.WARNING[I].WCODE = NULLIF(inRef.*:WCODE,'');
+				SET outputbodyRef.FCUBS_WARNING_RESP.WARNING[I].WDESC = NULLIF(inRef.*:WDESC,'');
+				SET I = I + 1;
+				MOVE inRef NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+			
+			IF FIELDNAME(inputBodyRef.*:"Stvw-Account-Sumary-Full".*[>]) IS NULL THEN
+				SET outputbodyRef."Stvw-Account-Sumary-Full" = NULL;
+			END IF;*/
+
+                       set OutputRoot=InputRoot;
+			SET OutputLocalEnvironment.Destination.CallableFlow.Reply.ReplyIdentifier = envRef.replyIdentifier;
+			PROPAGATE TO TERMINAL 'out' DELETE NONE;
+		--END IF;
+
+		SET Environment.outputData = OutputRoot;
+		----------------------------------------------------
+		---------------------- Response Logging -------------------------
+		MOVE domainDataRef TO Environment.outputData.SOAP;
+		SET Environment.resPayload = getPayLoad(domainName,domainDataRef,encodeRef,ccidRef);
+		SET OutputRoot.HTTPResponseHeader = NULL;
+		SET OutputRoot.SOAP = NULL;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		MOVE OutRef TO OutputRoot.XMLNSC;
+		-- CALL PayloadLogging(envRef.id,Environment.reqPayload,'CHANNEL_RESP',MessageFlowLabel,OutRef);
+   --CALL PayloadLogging(envRef.id,Environment.reqPayload,'Channel_Response',ApplicationLabel,envRef.source,envRef.service,envRef.operation,OutRef);
+      CALL PayloadLogging(envRef.id,Environment.reqPayload,'Channel_Response',ApplicationLabel,envRef.source,envRef.service,envRef.operation,envRef.Created_By,OutRef);
+             IF consoleLog_enable=TRUE THEN
+             	LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('AccountSummaryChannel_Response : '||Environment.reqPayload);
+             END IF;
+                   
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,' -------- CHANNEL_RESP -------') INTO rc;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'CHANNEL_RESP data is: '||Environment.resPayload) INTO rc;
+
+	END;
+END MODULE;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE COMPUTE MODULE BuildExceptionResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL BuildExceptionResponse();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE BuildExceptionResponse() BEGIN
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'..............Error Logging Started...........') INTO rc;
+		--DECLARE inRef REFERENCE TO InputRoot.SOAP;
+		DECLARE envRef REFERENCE TO Environment.Variables;
+		DECLARE enRef REFERENCE TO Environment;
+		DECLARE outRefer,outRef REFERENCE TO OutputRoot;
+		--DECLARE encodeID INTEGER InputRoot.Properties.Encoding;
+		--DECLARE ccsID INTEGER InputRoot.Properties.CodedCharSetId;
+		DECLARE domainName CHARACTER FIELDNAME(InputBody);
+		DECLARE domainDataRef REFERENCE TO InputBody;
+		DECLARE excpRef REFERENCE TO InputRoot.XMLNSC.ExceptionDetails;
+		DECLARE excpPayload CHARACTER getPayLoad(domainName,domainDataRef,envRef.encoding,envRef.codedCharSetId);
+		CREATE LASTCHILD OF Environment AS enRef DOMAIN 'XMLNSC';
+		CREATE LASTCHILD OF enRef AS enRef NAMESPACE 'soapenv' NAME 'Envelope';
+		CREATE LASTCHILD OF enRef AS enRef NAMESPACE 'soapenv' NAME 'Body';
+		CREATE LASTCHILD OF enRef AS enRef NAMESPACE 'esb' NAME ApplicationLabel;
+		CALL BuildExceptionDetails(excpRef,enRef,ApplicationLabel);
+		SET envRef.userDefinedException = Environment.XMLNSC;
+		MOVE domainDataRef TO Environment.XMLNSC;
+		SET domainName = FIELDNAME(domainDataRef);
+		DECLARE resPayload CHAR getPayLoad(domainName,domainDataRef,envRef.encoding,envRef.codedCharSetId);
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'Application Built Exception:'||resPayload) INTO rc;
+		DECLARE inputRef REFERENCE TO InputRoot.XMLNSC.ExceptionDetails;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC NAME 'ExceptionDetails';
+		DECLARE outExcpRef REFERENCE TO OutputRoot.XMLNSC.ExceptionDetails;
+
+		DECLARE errMsg CHARACTER;
+		IF CONTAINS(inputRef.excpText,'connection refused') OR CONTAINS(inputRef.excpText,'SocketTimeoutException')THEN
+			SET errMsg = 'Backend System / Flexcube is down';
+		END IF;
+
+		SET outExcpRef.Msg_Id = envRef.id;
+		SET outExcpRef.ExceptionType = inputRef.excpType;
+		SET outExcpRef.ExceptionNumber = inputRef.excpNumber;
+		SET outExcpRef.ExceptionLable = inputRef.excpLable;
+		SET outExcpRef.ExceptionMessage = NULLIF(errMsg,'');
+		SET outExcpRef.ExceptionDescription = inputRef.excpText;
+		SET outExcpRef.ActualExceptionText = inputRef.actualExcpText;
+
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.replyIdentifier = envRef.replyIdentifier;
+		--CALL writeToLogFile(MessageFlowLabel,logger_name,log_type,'..............End of Error Logging ...........') INTO rc;
+	END;
+END MODULE;
