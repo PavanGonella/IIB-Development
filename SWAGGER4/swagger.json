@@ -1,0 +1,51 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "SWAGGER4",
+    "version" : "1.0.0",
+    "description" : "SWAGGER4"
+  },
+  "paths" : {
+    "/get" : {
+      "get" : {
+        "operationId" : "getGet",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve get",
+        "parameters" : [ {
+          "name" : "ID",
+          "in" : "query",
+          "type" : "number"
+        } ]
+      }
+    },
+    "/getbyid" : {
+      "get" : {
+        "operationId" : "getGetbyid",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve getbyid",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "type" : "integer"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/swagger4/v1"
+}

@@ -1,0 +1,37 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Swagger_put_id",
+    "version" : "1.0.0",
+    "description" : "Swagger_put_id"
+  },
+  "paths" : {
+    "/put" : {
+      "put" : {
+        "operationId" : "putPut",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Update put",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "type" : "number"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/swagger_put_id/v1"
+}
