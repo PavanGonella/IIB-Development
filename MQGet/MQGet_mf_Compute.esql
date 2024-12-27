@@ -1,0 +1,22 @@
+
+
+CREATE COMPUTE MODULE MQGet_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Inref REFERENCE TO InputRoot.XMLNSC.Message;
+		MOVE Inref FIRSTCHILD;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		WHILE LASTMOVE(Inref) DO
+			CREATE LASTCHILD OF OutputRoot DOMAIN 'MQMD';
+			SET OutputRoot.MQMD.MsgId = CAST(FIELDNAME(Inref) AS BLOB CCSID InputRoot.Properties.CodedCharSetId);
+		    SET OutputRoot.XMLNSC.Message.Field = Inref.Person[1];
+		    PROPAGATE TO TERMINAL 'out';
+		    CREATE LASTCHILD Of OutputRoot DOMAIN 'MQMD';
+		    SET OutputRoot.MQMD.MsgId = CAST(FIELDNAME(Inref) AS BLOB CCSID InputRoot.Properties.CodedCharSetId);
+		    SET OutputRoot.XMLNSC.Message.Field = Inref.Person[2];
+		    PROPAGATE TO TERMINAL 'out1';
+		    MOVE Inref NEXTSIBLING;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;

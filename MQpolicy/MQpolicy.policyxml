@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+  <policy policyType="MQTTPublish" policyName="MQpolicy" policyTemplate="MQTTPublish">
+    <clientId></clientId>
+    <topicName></topicName>
+    <hostName></hostName>
+    <port>1883</port>
+    <qos>0</qos>
+    <securityIdentity></securityIdentity>
+    <useSSL>false</useSSL>
+  </policy>
+</policies>

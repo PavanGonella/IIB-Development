@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE MergeTwoRecordsIntoOne_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Inref1 REFERENCE TO InputRoot.XMLNSC.Root.Child1;
+		DECLARE Inref2 REFERENCE TO InputRoot.XMLSC.Root.Child2;
+		
+		SET OutputRoot.XMLNSC.Root.Child1.Field1 = Inref1.Field1;
+		SET OutputRoot.XMLNSC.Root.Child1.Field2 = Inref1.Field2;
+		SET OutputRoot.XMLNSC.Root.Child1.Field3 = Inref2.Field1;
+		SET OutputRoot.XMLNSC.Root.Child1.Field4 = Inref2.Field2;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
