@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE BusinnesFlowDB_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Id REFERENCE TO InputLocalEnvironment.HTTP.Input.QueryString.Id;
+		
+		SET OutputRoot.XMLNSC.Data.values[] = PASSTHRU('SELECT * FROM EMPLOYEES WHERE Id=?' VALUES(Id));
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;
