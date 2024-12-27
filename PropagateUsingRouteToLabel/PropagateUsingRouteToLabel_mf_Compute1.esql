@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE PropagateUsingRouteToLabel_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE query,Empname,dept,status CHARACTER;
+		DECLARE id INTEGER;
+		
+		SET id = InputRoot.XMLNSC.Employee.id;
+		SET Empname = InputRoot.XMLNSC.Employee.name;
+		SET dept = InputRoot.XMLNSC.Employee.dept;
+		SET status = InputRoot.XMLNSC.Employee.status;
+		SET Environment.Result.Data[] = PASSTHRU('INSERT INTO EMPLOYEE(id,Empname,dept,status)');  
+		RETURN TRUE;
+	END;
+END MODULE;

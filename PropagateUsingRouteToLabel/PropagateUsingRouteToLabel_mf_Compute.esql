@@ -1,0 +1,12 @@
+
+
+CREATE COMPUTE MODULE PropagateUsingRouteToLabel_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE query CHARACTER;
+		SET query = 'SELECT * FROM EMPLOYEE';
+		SET OutputRoot.XMLNSC.Result.Data[] = PASSTHRU(query);
+		RETURN TRUE;
+	END;
+
+END MODULE;

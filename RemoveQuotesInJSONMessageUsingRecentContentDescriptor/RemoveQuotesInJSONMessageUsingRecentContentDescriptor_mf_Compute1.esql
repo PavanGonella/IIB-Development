@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE RemoveQuotesInJSONMessageUsingRecentContentDescriptor_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.root = InputRoot.DFDL.validate;
+		RETURN TRUE;
+	END;
+
+END MODULE;

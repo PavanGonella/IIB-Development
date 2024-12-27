@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE ReplaceParameterInURLUsingQueryStringValues_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var1 CHARACTER InputLocalEnvironment.HTTP.Input.QueryString.ser;
+		DECLARE var2 CHARACTER 'SELECT * FROM SERVICE_DATA WHERE SERVICE_ID=?';
+        SET OutputRoot.XMLNSC.Data.Values[] = PASSTHRU(var2,var1);
+		RETURN TRUE;
+	END;
+
+
+END MODULE;

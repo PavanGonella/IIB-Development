@@ -1,0 +1,15 @@
+
+
+CREATE COMPUTE MODULE RemoveQuotesInJSONMessageUsingRecentContentDescriptor_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE myBlob , newBlob BLOB;
+		DECLARE myChar CHARACTER;
+		SET myBlob = ASBITSTREAM(InputRoot.JSON.Data.root);
+		SET myChar = CAST(myBlob AS CHARACTER CCSID 1208 ENCODING 546);
+		SET myChar = REPLACE(myChar,'"','');
+		SET newBlob = CAST(myChar AS BLOB CCSID 1208 ENCODING 546);
+		SET OutputRoot.BLOB.BLOB = newBlob;
+		RETURN TRUE;
+	END;
+END MODULE;

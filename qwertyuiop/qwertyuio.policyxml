@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+  <policy policyType="ActivityLog" policyName="qwertyuio" policyTemplate="ActivityLog">
+    <enabled>true</enabled>
+    <filter></filter>
+    <minSeverityLevel>INFORMATIONAL</minSeverityLevel>
+    <elkLog>false</elkLog>
+    <elkConnections></elkConnections>
+    <fileName></fileName>
+    <numberOfLogs>4</numberOfLogs>
+    <maxAgeMins>0</maxAgeMins>
+    <maxFileSizeMb>25</maxFileSizeMb>
+    <formatEntries>false</formatEntries>
+    <consoleLog>false</consoleLog>
+    <consoleLogFormat>text</consoleLogFormat>
+    <additionalJsonElements></additionalJsonElements>
+  </policy>
+</policies>
