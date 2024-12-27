@@ -1,0 +1,22 @@
+DECLARE ns6 NAMESPACE 'http://www.example.org/NewWSDLFile/';
+DECLARE ns NAMESPACE 'http://www.example.org/NewWSDLFile';
+
+
+CREATE COMPUTE MODULE SOAPAllOperations_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		IF InputRoot.SOAP.Context.operation = 'Addition' THEN 
+			SET OutputRoot.SOAP.Body.ns6:AdditionResponse.sum = InputRoot.SOAP.Body.ns6:Addition.a + InputRoot.SOAP.Body.ns6:Addition.b;
+	    ELSEIF InputRoot.SOAP.Context.operation = 'Substraction' THEN
+	    	SET OutputRoot.SOAP.Body.ns6:SubstractionResponse.sub = InputRoot.SOAP.Body.ns6:Substraction.a - InputRoot.SOAP.Body.ns6:Substraction.b;
+		ELSEIF InputRoot.SOAP.Context.operation = 'Multiplication' THEN
+			SET OutputRoot.SOAP.Body.ns6:MultiplicationResponse.prod = InputRoot.SOAP.Body.ns6:Multiplication.a * InputRoot.SOAP.Body.ns6:Multiplication.b;
+	    ELSEIF InputRoot.SOAP.Context.operation = 'Division' THEN	
+			SET OutputRoot.SOAP.Body.ns6:DivisionResponse.div = InputRoot.SOAP.Body.ns6:Division.a / InputRoot.SOAP.Body.ns6:Division.b;
+		END IF;	
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

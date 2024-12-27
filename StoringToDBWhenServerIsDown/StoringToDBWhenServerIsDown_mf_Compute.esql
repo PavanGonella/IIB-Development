@@ -1,0 +1,21 @@
+
+
+CREATE COMPUTE MODULE StoringToDBWhenServerIsDown_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputLocalEnvironment.TimeoutRequest.Action='SET';
+		SET OutputLocalEnvironment.TimeoutRequest.Identifier='Unique1';
+		SET OutputLocalEnvironment.TimeoutRequest.StartDate=CURRENT_DATE;
+		SET OutputLocalEnvironment.TimeoutRequest.StartTime='05:07:10';
+		SET OutputLocalEnvironment.TimeoutRequest.Interval=20;
+		SET OutputLocalEnvironment.TimeoutRequest.Count=20;
+		SET OutputLocalEnvironment.TimeoutRequest.IgnoreMissed=FALSE;
+		SET OutputLocalEnvironment.TimeoutRequest.AllowOverwrite=TRUE;
+
+		
+		RETURN TRUE;
+	END;
+
+
+END MODULE;

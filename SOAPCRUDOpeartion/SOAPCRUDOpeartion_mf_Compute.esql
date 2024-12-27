@@ -1,0 +1,24 @@
+DECLARE ns77 NAMESPACE 'http://www.example.org/SOAPCRUD/';
+
+
+
+CREATE COMPUTE MODULE SOAPCRUDOpeartion_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Id,Age,PhoneNo,AccountNumber INTEGER;
+		DECLARE FirstName, LastName CHARACTER;
+		DECLARE Dob DATE;
+		SET Id = InputRoot.SOAP.Body.ns77:Insert.ID;
+		SET FirstName = InputRoot.SOAP.Body.ns77:Insert.FIRSTNAME;
+		SET LastName = InputRoot.SOAP.Body.ns77:Insert.LASTNAME;
+		SET Age = InputRoot.SOAP.Body.ns77:Insert.AGE;
+		SET Dob = InputRoot.SOAP.Body.ns77:Insert.DOB;
+		SET PhoneNo = InputRoot.SOAP.Body.ns77:Insert.PHONENO;
+		SET AccountNumber =InputRoot.SOAP.Body.ns77:Insert.ACCOUNT_NUMBER;
+		DECLARE query CHARACTER 'INSERT INTO CUSTOMERS(ID,FIRSTNAME,LASTNAME,AGE,DOB,PHONENO,ACCOUNT_NUMBER)';
+		PASSTHRU(query,Id,FirstName,LastName,Age,Dob,PhoneNo,AccountNumber);
+		SET OutputRoot.SOAP.Body.ns77:InsertResponse.out= 'Data added sucessfully';
+		RETURN TRUE;
+	END;
+
+END MODULE;

@@ -1,0 +1,17 @@
+DECLARE ns NAMESPACE 'http://www.example.org/NewWSDLFile/';
+
+
+CREATE COMPUTE MODULE SOAPInsertOperation_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Name CHARACTER;
+		DECLARE Id INTEGER;
+		SET Name = InputRoot.SOAP.Body.ns:SOAPInsertOperation.name;
+		SET Id = InputRoot.SOAP.Body.ns:SOAPInsertOperation.id;
+		INSERT INTO Database.DEMO(NAME,ID)VALUES(Name,Id);
+		SET OutputRoot.SOAP.Body.ns:SOAPInsertOperationResponse.out = 'Data Inserted sucessfully';
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

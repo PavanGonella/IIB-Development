@@ -1,0 +1,22 @@
+
+
+Importing file: C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\SOAPCRUDOpeartion\SOAPCRUDOpeartion.wsdl
+
+The WSDL import will proceed with bindings SOAPCRUDOpeartionSOAP.
+Creating wsdl schema document for file:///C:/Users/Sreenivas Bandaru/IBM/ACET12/workspace/SOAPCRUDOpeartion/SOAPCRUDOpeartion.wsdl.
+Parsing wsdl binding {http://www.example.org/SOAPCRUDOpeartion/}SOAPCRUDOpeartionSOAP.
+Parsing wsdl binding input NewOperation.
+Parsing wsdl binding output NewOperation.
+Processing doc style for operation NewOperation.
+Populating WSDL schema SOAPCRUDOpeartion.xsd.
+Creating file SOAPCRUDOpeartion.xsd in the workspace.
+Creating file SOAPCRUDOpeartion_InlineSchema1.xsd in the workspace.
+Copying source WSDL SOAPCRUDOpeartion.wsdl to SOAPCRUDOpeartion.wsdl.
+
+Elapsed time processing this message definition file: 0.517 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+
