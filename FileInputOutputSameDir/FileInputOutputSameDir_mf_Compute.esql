@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE FileInputOutputSameDir_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.Result = InputRoot.XMLNSC.customers;
+		RETURN TRUE;
+	END;
+
+END MODULE;

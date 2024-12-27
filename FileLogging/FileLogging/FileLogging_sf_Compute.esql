@@ -1,0 +1,33 @@
+BROKER SCHEMA FileLogging
+DECLARE var EXTERNAL CHARACTER 'C:\LOG4J\Log4jConfigurationFile.xml';
+DECLARE var2 BOOLEAN;
+
+CREATE COMPUTE MODULE FileLogging_sf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL log(var) INTO var2;
+		CALL myPROC();
+		RETURN TRUE;
+	END;
+
+
+CREATE PROCEDURE myPROC() BEGIN
+	DECLARE inrequest,outresponse CHARACTER;
+	SET OutputRoot.JSON.Data = InputRoot.JSON.Data;
+	SET inrequest = CAST(ASBITSTREAM(InputRoot.XMLNSC.Message)AS CHARACTER CCSID InputRoot.Properties.CodedCharSetId ENCODING InputRoot.Properties.Encoding);
+	SET outresponse = CAST(ASBITSTREAM(InputRoot.XMLNSC.Message)AS CHARACTER CCSID InputRoot.Properties.CodedCharSetId ENCODING InputRoot.Properties.Encoding);
+    CALL writeToLog(MessageFlowLabel,'My logger','INFO','Application data: ' || inrequest) INTO var2;
+    CALL writeToLog(MessageFlowLabel,'My logger','INFO','Application data : ' || outresponse) INTO var2;
+END;	
+END MODULE;	
+
+
+create FUNCTION writeToLog(in mfname CHARACTER, in logger_name CHARACTER, in level CHARACTER , in data CHARACTER)
+RETURNS boolean
+LANGUAGE JAVA
+EXTERNAL NAME "com.ibm.broker.IAM3.Log4jNode.log";
+
+create FUNCTION log(in configure CHARACTER) 
+RETURNS BOOLEAN
+language JAVA
+EXTERNAL NAME "com.ibm.broker.IAM3.Log4jNode.initLog4j";
