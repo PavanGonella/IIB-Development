@@ -1,0 +1,12 @@
+
+
+CREATE COMPUTE MODULE RouterFlowDB_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE myId REFERENCE TO InputLocalEnvironment.HTTP.Input.QueryString.Id;
+		
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

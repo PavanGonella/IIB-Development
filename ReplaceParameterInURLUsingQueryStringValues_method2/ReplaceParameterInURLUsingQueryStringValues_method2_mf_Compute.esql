@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE ReplaceParameterInURLUsingQueryStringValues_method2_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var1 REFERENCE TO InputLocalEnvironment.HTTP.Input.QueryString.sid;
+		SET OutputRoot.JSON.Data.Values = PASSTHRU('SELECT * FROM SEVICE_DATA WHERE SERVICE_ID=?'VALUES(var1));
+		RETURN TRUE;
+	END;
+END MODULE;

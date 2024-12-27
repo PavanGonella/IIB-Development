@@ -1,0 +1,53 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "sample",
+    "version" : "1.0.0",
+    "description" : "sample"
+  },
+  "paths" : {
+    "/post" : {
+      "post" : {
+        "operationId" : "postPost",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a post",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    },
+    "/get" : {
+      "get" : {
+        "operationId" : "getGet",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve get",
+        "parameters" : [ {
+          "name" : "param1",
+          "in" : "query",
+          "type" : "string"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/sample/v1"
+}

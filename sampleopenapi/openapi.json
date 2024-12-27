@@ -1,0 +1,27 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "sampleopenapi",
+    "version": "1.0.0",
+    "description": "sampleopenapi"
+  },
+  "servers": [
+    {
+      "url": "/sampleopenapi/v1"
+    }
+  ],
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/sampleoperation": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    }
+  }
+}
