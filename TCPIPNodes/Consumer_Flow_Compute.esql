@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE Consumer_Flow_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+
+
+END MODULE;

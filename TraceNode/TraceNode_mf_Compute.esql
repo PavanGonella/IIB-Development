@@ -1,0 +1,12 @@
+
+
+CREATE COMPUTE MODULE TraceNode_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.Message.CreationTime = InputRoot.Properties.CreationTime;
+	
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;
