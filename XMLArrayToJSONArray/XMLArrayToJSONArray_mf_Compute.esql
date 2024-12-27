@@ -1,0 +1,18 @@
+
+
+CREATE COMPUTE MODULE XMLArrayToJSONArray_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE xmlRef REFERENCE TO InputRoot.XMLNSC.Items.Item;
+		DECLARE jsonRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		CREATE FIELD jsonRef.ArrayItems TYPE JSON.Array;
+		DECLARE i INTEGER 1;
+		FOR itemRef AS xmlRef DO
+			CREATE FIELD jsonRef.ArrayItems.Item[i] VALUE itemRef;
+			SET i = i + 1;
+		END FOR;
+		RETURN TRUE;
+	END;
+
+END MODULE;

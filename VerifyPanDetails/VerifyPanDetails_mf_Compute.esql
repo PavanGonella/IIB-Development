@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE VerifyPanDetails_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+ 
+   		DECLARE InputPanNumber REFERENCE TO InputRoot.XMLNSC.PanDetails.PanNumber;
+		   		SET OutputRoot.XMLNSC.Customer.Details[] = PASSTHRU('SELECT * FROM PANUSERS
+		   				WHERE pannumber = ?'VALUES(InputPanNumber));
+		   		IF InputPanNumber IS NULL THEN
+		   			SET OutputRoot.XMLNSC.Result.Message = 'No user exists with the specified details';	
+		   		END IF;			
+   		
+		RETURN TRUE;
+	END;
+END MODULE;

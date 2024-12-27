@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="firstname" type="xsd:string"/>
+  <xsd:element name="dob" type="xsd:string"/>
+  <xsd:element name="customers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="id"/>
+        <xsd:element ref="firstname"/>
+        <xsd:element ref="lastname"/>
+        <xsd:element ref="age"/>
+        <xsd:element ref="dob"/>
+        <xsd:element ref="phoneno"/>
+        <xsd:element ref="noofrecords"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="id" type="xsd:string"/>
+  <xsd:element name="noofrecords">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="age" type="xsd:string"/>
+  <xsd:element name="phoneno" type="xsd:string"/>
+  <xsd:element name="lastname" type="xsd:string"/>
+</xsd:schema>

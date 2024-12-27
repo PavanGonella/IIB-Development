@@ -1,0 +1,11 @@
+ 
+
+CREATE COMPUTE MODULE Validate_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.Message = 'The message is in XMLNSC format';
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

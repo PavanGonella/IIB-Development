@@ -1,0 +1,25 @@
+
+
+CREATE COMPUTE MODULE XMLToCSV2_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.MessageFormat = '';
+		SET OutputRoot.Properties.MessageSet = '';
+		SET OutputRoot.Properties.MessageType ='{}:CSV';
+		DECLARE InRef REFERENCE TO InputRoot.XMLNSC.school;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'DFDL';
+		DECLARE OutRef REFERENCE TO OutputRoot.DFDL.CSV;
+		
+		SET OutputRoot.DFDL.CSV.header.head_field1 = CAST(ASBITSTREAM(InputRoot.XMLNSC.school.teacher.name) AS CHARACTER CCSID 1208);
+		SET OutputRoot.DFDL.CSV.header.head_field2 = CAST(ASBITSTREAM(InputRoot.XMLNSC.school.teacher.subject) AS CHARACTER CCSID 1208);
+	
+		FOR InRef AS InputRoot.XMLNSC.school.teacher[] DO
+			SET OutputRoot.DFDL.CSV.record.field1 = CAST(ASBITSTREAM(InRef.teacher.name) AS CHARACTER CCSID 1208);
+			SET OutputRoot.DFDL.CSV.record.field2 = CAST(ASBITSTREAM(InRef.teacher.subject) AS CHARACTER CCSID 1208);
+		END FOR;	
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

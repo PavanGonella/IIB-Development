@@ -1,0 +1,12 @@
+DECLARE ns NAMESPACE 'http://www.example.org/NewWSDLFile/';
+
+
+CREATE COMPUTE MODULE WSSecurity_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.ns:AdditionResponse.sum = InputRoot.SOAP.Body.ns:Addition.a + InputRoot.SOAP.Body.ns:Addition.b;
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

@@ -1,0 +1,18 @@
+
+
+CREATE COMPUTE MODULE XMLToCSVUsingDFDL_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.MessageType = '{}:school';
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'DFDL';
+		CREATE FIELD OutputRoot.XMLNSC.school;
+		DECLARE outref REFERENCE TO Environment.data;
+		FOR inref AS InputRoot.XMLNSC.school.teacher[] DO
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.school AS outref NAME 'teacher';
+			SET outref.name = inref.name;
+			SET outref.subject = inref.subject;
+		END FOR;	
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,0 +1,33 @@
+
+
+CREATE COMPUTE MODULE ValidatingXMLRequest_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.XMLNSC.Root.Header;
+		DECLARE var2 REFERENCE TO InputRoot.XMLNSC.Root.Body.Data.catalog.book;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'requestId' VALUE var.requestId;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'channelId' VALUE var.channelId;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'requestTime' VALUE var.requestTime;
+		DECLARE var3 CHARACTER;
+		DECLARE var4 BOOLEAN;
+		DECLARE i2 INTEGER 1;
+		IF var.channelId = 'TPH' OR var.channelId = 'FCR' THEN
+			FOR i AS InputRoot.XMLNSC.Root.Body.Data.catalog.book[] DO
+				SET var3= i.author;
+				SET var4 =CONTAINS(var3,'Corets');
+				IF var4 THEN
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.catalog.book[i2] NAME 'author' VALUE i.author;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.catalog.book[i2] NAME 'title' VALUE i.title;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.catalog.book[i2] NAME 'genre' VALUE i.genre;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.catalog.book[i2] NAME 'price' VALUE i.price;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.catalog.book[i2] NAME 'publish_date' VALUE i.publish_date;
+					SET i2 = i2 +1;
+				END IF;
+				
+			END FOR;	
+		ELSE
+			SET OutputRoot.XMLNSC.Root.Message.Data = 'Invalid channelId please provide the valid Id....';
+		END IF;	
+		RETURN TRUE;
+	END;
+END MODULE;

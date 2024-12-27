@@ -1,0 +1,36 @@
+
+
+CREATE COMPUTE MODULE ValidatingXMLRequest_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var REFERENCE TO InputRoot.XMLNSC.Root.Header;
+		DECLARE var2 CHARACTER FIELDNAME(InputRoot.XMLNSC.Root.Body.Data.*);
+		
+		DECLARE IsCorrect BOOLEAN;
+		DECLARE InAuthor CHARACTER;
+		DECLARE i, i2 INTEGER 1;
+		DECLARE var4 REFERENCE TO InputRoot.XMLNSC.Root.Body.Data.{var2}.book;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'requestId' VALUE var.requestId;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'channelId' VALUE var.channelId;
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Header NAME 'requestTime' VALUE var.requestTime;
+		IF var.channelId='TPH' OR var.channelId='FCH' THEN
+			FOR i AS InputRoot.XMLNSC.Root.Body.Data.{var2}.book[] DO
+				SET InAuthor = i.author;
+				SET IsCorrect = CONTAINS(InAuthor,'Corets');
+				IF IsCorrect THEN
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.{var2}.book[i2] NAME 'author' VALUE i.author;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.{var2}.book[i2] NAME 'title' VALUE i.title;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.{var2}.book[i2] NAME 'genre' VALUE i.genre;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.{var2}.book[i2] NAME 'price' VALUE i.price;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.Root.Body.Data.{var2}.book[i2] NAME 'publish_date' VALUE i.publish_date;
+					SET i2 = i2 +1;
+				END IF;
+			END FOR;	
+		ELSE
+			SET OutputRoot.XMLNSC.Root.Message = 'Invalid channelId please enter valid channel Id...';	
+		END IF;	
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

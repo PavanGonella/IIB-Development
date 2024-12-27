@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <input path="/Customers%20XML%20Test%20Data.xsd"/>
+    <output path="/CSV.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="XMLToCSVUsingMappingNode_mf_Mapping">
+        <input path="mb:msg(customers,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_customers"/>
+        <output path="mb:msg(CSV,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_CSV"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_customers/Properties"/>
+            <output path="$ComIbmMessageAssembly_CSV/Properties"/>
+            <override>
+                <assign value="{}:CSV">
+                    <output path="$ComIbmMessageAssembly_CSV/Properties/MessageType"/>
+                </assign>
+            </override>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

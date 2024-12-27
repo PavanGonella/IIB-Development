@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE Validate_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.Message = 'The message is in JSON format';
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

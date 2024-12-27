@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Root": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Salary": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ID",
+        "Name",
+        "Salary"
+      ]
+    }
+  },
+  "required": [
+    "Root"
+  ]
+}
