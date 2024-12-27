@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE ExceptionTree_mf_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 DECLARE var CHARACTER;
+	     SET var = OutputExceptionList.RecoverableException;
+	     SET OutputRoot.XMLNSC.Exception.Data  = var;
+		RETURN TRUE;
+	END;
+
+
+END MODULE;

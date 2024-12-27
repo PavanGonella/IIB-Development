@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE ExceptionHandling_sf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE var CHARACTER;
+		SET var = InputExceptionList.RecoverableException.Insert[1].Text;
+		CALL storeException(var,MessageFlowLabel,ApplicationLabel);
+		RETURN TRUE;
+	END;
+		CREATE PROCEDURE storeException (IN Text CHARACTER,IN MessageFlowLabel CHARACTER,IN ApplicationLabel CHARACTER)
+		LANGUAGE DATABASE
+		EXTERNAL NAME "EXCEP_HANDLE";
+		
+		
+END MODULE;

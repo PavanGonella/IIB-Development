@@ -1,0 +1,13 @@
+PATH DBLogging;
+
+CREATE COMPUTE MODULE FetchCustomerDeatilsService_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE id REFERENCE TO InputLocalEnvironment.HTTP.Input.QueryString.Id;
+		SET OutputRoot.XMLNSC.Result.Values[] = PASSTHRU('SELECT * FROM Customers WHERE Id = ?'VALUES(id));
+		CALL DBLogging.DBLog(ApplicationLabel,MessageFlowLabel,CURRENT_TIMESTAMP,'677DBL6');
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

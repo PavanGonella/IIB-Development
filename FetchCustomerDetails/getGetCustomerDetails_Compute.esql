@@ -1,0 +1,14 @@
+
+
+CREATE COMPUTE MODULE getGetCustomerDetails_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE id REFERENCE TO InputRoot.XMLNSC.InputData.Id;
+		
+		SET OutputRoot.XMLNSC.Result.Values[] = PASSTHRU('SELECT * FROM CUSTOMERS WHERE Id =?' VALUES(id));
+		
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;

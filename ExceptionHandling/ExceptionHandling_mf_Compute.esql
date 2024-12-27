@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE ExceptionHandling_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.Result = InputRoot.XMLNSC.Root;
+	     Throw user exception;
+		RETURN TRUE;
+	END;
+END MODULE;

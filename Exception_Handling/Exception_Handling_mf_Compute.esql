@@ -1,0 +1,12 @@
+
+
+CREATE COMPUTE MODULE Exception_Handling_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+  	END;
+END MODULE;
