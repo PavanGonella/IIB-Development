@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFileInput.msgnode="ComIbmFileInput.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="delmited_file.msgflow" nsPrefix="delmited_file.msgflow">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmDatabase.msgnode="ComIbmDatabase.msgnode" xmlns:ComIbmDatabaseInput.msgnode="ComIbmDatabaseInput.msgnode" xmlns:ComIbmDatabaseRetrieve.msgnode="ComIbmDatabaseRetrieve.msgnode" xmlns:ComIbmDatabaseRoute.msgnode="ComIbmDatabaseRoute.msgnode" xmlns:ComIbmFileInput.msgnode="ComIbmFileInput.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ComIbmSOAPAsyncRequest.msgnode="ComIbmSOAPAsyncRequest.msgnode"
+    xmlns:ComIbmSOAPRequest.msgnode="ComIbmSOAPRequest.msgnode" xmlns:ComIbmTCPIPClientInput.msgnode="ComIbmTCPIPClientInput.msgnode" xmlns:ComIbmTCPIPClientOutput.msgnode="ComIbmTCPIPClientOutput.msgnode" xmlns:ComIbmWSRequest.msgnode="ComIbmWSRequest.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="delmited_file.msgflow" nsPrefix="delmited_file.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" nodeLayoutStyle="SQUARE">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
     <translation xmi:type="utility:TranslatableString" key="delmited_file" bundleName="delmited_file" pluginId="Delimited"/>
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Delimited/icons/full/obj16/delmited_file.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Delimited/icons/full/obj30/delmited_file.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="376,58" computeExpression="esql://routine/#delimited_Compute.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="134,106" computeExpression="esql://routine/#delimited_Compute.Main">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="156,156" inputDirectory="C:\Users\Sreenivas Bandaru\Desktop\TEST\in" messageDomainProperty="DFDL" messageTypeProperty="{}:Delimited_dfdl" recordDetection="delimited" recordLength="8">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="324,124" inputDirectory="C:\Users\Sreenivas Bandaru\Desktop\TEST\in" messageDomainProperty="DFDL" messageTypeProperty="{}:Delimited_dfdl" recordDetection="delimited" recordLength="8">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="607,156" outputDirectory="C:\Users\Sreenivas Bandaru\Desktop\TEST\out" outputFilename="DelimitedOut" outputMode="append" recordDefinition="delimited">
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="549,181" outputDirectory="C:\Users\Sreenivas Bandaru\Desktop\TEST\out" outputFilename="DelimitedOut" outputMode="append" recordDefinition="delimited">
         <translation xmi:type="utility:ConstantString" string="File Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="443,174" httpVersion="1.1" protocol="TLS">
+        <translation xmi:type="utility:ConstantString" string="HTTP Request"/>
+      </nodes>
+      <nodes xmi:type="ComIbmDatabaseInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="411,242" databaseInputExpression="esql://routine/#delmited_file_Database_Input">
+        <translation xmi:type="utility:ConstantString" string="Database Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmDatabase.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="805,213" statement="esql://routine/#delmited_file_Database.Main">
+        <translation xmi:type="utility:ConstantString" string="Database"/>
+      </nodes>
+      <nodes xmi:type="ComIbmDatabaseRetrieve.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="853,70" sqlQuery="">
+        <translation xmi:type="utility:ConstantString" string="Database Retrieve"/>
+      </nodes>
+      <nodes xmi:type="ComIbmDatabaseRoute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="334,193" sqlQuery="">
+        <outTerminals terminalNodeID="Match" dynamic="true" label="Match"/>
+        <translation xmi:type="utility:ConstantString" string="Database Route"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTCPIPClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="132,18">
+        <translation xmi:type="utility:ConstantString" string="TCPIP Client Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTCPIPClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="295,265">
+        <translation xmi:type="utility:ConstantString" string="TCPIP Client Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="427,37" useHTTPTransport="true" webServiceURL="/JHTK" sslProtocol="TLS" requestCompressionType="gzip">
+        <translation xmi:type="utility:ConstantString" string="SOAP Request"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPAsyncRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="523,267" useHTTPTransport="true" useAsyncSocket="true">
+        <translation xmi:type="utility:ConstantString" string="SOAP Async Request"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.EOD" targetTerminalName="InTerminal.EOD"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.open" targetTerminalName="InTerminal.close"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.default" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

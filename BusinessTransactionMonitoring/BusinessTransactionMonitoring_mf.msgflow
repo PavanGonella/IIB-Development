@@ -6,7 +6,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/BusinessTransactionMonitoring/icons/full/obj16/BusinessTransactionMonitoring_mf.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/BusinessTransactionMonitoring/icons/full/obj30/BusinessTransactionMonitoring_mf.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="295,70" computeExpression="esql://routine/#BusinessTransactionMonitoring_mf_Compute.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="297,81" computeExpression="esql://routine/#BusinessTransactionMonitoring_mf_Compute.Main">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
       <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="64,74" URLSpecifier="/btm" messageDomainProperty="XMLNSC">

@@ -6,19 +6,19 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/DB_log_task/icons/full/obj16/DB_mf.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/DB_log_task/icons/full/obj30/DB_mf.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="231,145" URLSpecifier="/p1" messageDomainProperty="JSON">
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="108,133" URLSpecifier="/p1" messageDomainProperty="XMLNSC">
         <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
       </nodes>
       <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="721,157">
         <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="343,35" dataSource="ODBC1" transaction="commit" computeExpression="esql://routine/#DB_mf_Compute.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="265,10" dataSource="system" connectDatasourceBeforeFlowStarts="true" transaction="commit" computeExpression="esql://routine/#DB_mf_Compute.Main">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="600,31" dataSource="ODBC1" transaction="commit" computeExpression="esql://routine/#DB_mf_Compute1.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="608,35" dataSource="system" transaction="commit" computeExpression="esql://routine/#DB_mf_Compute1.Main">
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="468,110" URLSpecifier="http://localhost:7801/p2" httpVersion="1.1" protocol="TLS" messageDomainProperty="XMLNSC">
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="477,146" URLSpecifier="http://localhost:7800/p2" httpVersion="1.1" protocol="TLS" messageDomainProperty="XMLNSC">
         <translation xmi:type="utility:ConstantString" string="HTTP Request"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>

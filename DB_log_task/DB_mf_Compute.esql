@@ -1,6 +1,6 @@
 
 
-CREATE COMPUTE MODULE DB_mf_Compute
+CREATE COMPUTE MODULE                       -- tambdi chamdi chamkate = unhaat laka laka laka laka laka laka ; 
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		--CALL CopyMessageHeaders();
@@ -57,11 +57,17 @@ CREATE COMPUTE MODULE DB_mf_Compute
 		SET LogType ='Channel request';
 		
 		CALL inserting(appName, msgName, LogType, msg);
-		
+		CALL updating(username,MsgName,LogType,msg);
 		
 		--Data is changed to the json to xml
-		SET OutputRoot.XMLNSC.result = InputRoot.JSON.Data;
-		
+		DECLARE var REFERENCE TO InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+		DECLARE RequestId REFERENCE TO InputRoot.XMLNSC.msg.RequestId;
+		SET OutputRoot.MQRFH2.usr.ID=RequestId;
+		SET OutputRoot.XMLNSC.root=var;
+        
+        declare var reference to InputRoot.MQRFH2.usr.id = req_id ;
+        SET OutputRoot.XMLNSC.root = var;
+        		
 	END;
 	
 	
@@ -70,6 +76,11 @@ END MODULE;
 CREATE PROCEDURE inserting (In APP_NAME CHARACTER, In MSG_FLOW CHARACTER, IN LOG_TYPE CHARACTER, IN msg CHARACTER)
 LANGUAGE DATABASE
 EXTERNAL NAME "INSERTION";
+
+
+
+
+
 
 
 

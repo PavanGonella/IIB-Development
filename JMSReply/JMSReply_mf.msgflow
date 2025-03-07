@@ -9,7 +9,7 @@
       <nodes xmi:type="ComIbmJMSClientReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="684,96" useDistList="true" locationJndiBindings="file:/C:/JMS/" connectionFactoryName="ConnectionFactory2">
         <translation xmi:type="utility:ConstantString" string="JMS Reply"/>
       </nodes>
-      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="30,108" sourceQueueName="Destination1" locationJndiBindings="file:/C:/JMS/" connectionFactoryName="ConnectionFactory1" messageDomainProperty="XMLNSC" transactionMode="yes">
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="30,108" sourceQueueName="Destination1" locationJndiBindings="file:/C:/JMS/" connectionFactoryName="ConnectionFactory1" backoutDestination="file:/C:/JMS" messageDomainProperty="XMLNSC" transactionMode="yes">
         <translation xmi:type="utility:ConstantString" string="JMS Input"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="351,106" computeExpression="esql://routine/#JMSReply_mf_Compute.Main" computeMode="all">

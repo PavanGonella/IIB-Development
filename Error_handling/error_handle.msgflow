@@ -7,37 +7,37 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Error_handling/icons/full/obj16/error_handle.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Error_handling/icons/full/obj30/error_handle.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="498,16" messageText="The message did not contain the required field">
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="441,294" messageText="The message did not contain the required field">
         <translation xmi:type="utility:ConstantString" string="Throw"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="772,153" destination="file" filePath="C:\Users\Sreenivas Bandaru\Desktop\TEST\Error_log\trace.log">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="708,382" destination="file" filePath="C:\Users\Sreenivas Bandaru\Desktop\TEST\Error_log\trace.log">
         <translation xmi:type="utility:ConstantString" string="Trace"/>
       </nodes>
-      <nodes xmi:type="ComIbmValidate.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="410,107" domain="JSON" set="jsonvaler1.schema.json" checkSet="true" validateMaster="contentAndValue">
+      <nodes xmi:type="ComIbmValidate.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="346,336" domain="JSON" set="jsonvaler1.schema.json" checkSet="true" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="Validate"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="126,112" URLSpecifier="/p1" messageDomainProperty="JSON" messageSetProperty="jsonvaler1.schema.json" validateMaster="contentAndValue">
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="360,236" URLSpecifier="/p1" messageDomainProperty="JSON" messageSetProperty="jsonvaler1.schema.json" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="901,322">
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="446,201">
         <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="231,108" computeExpression="esql://routine/#error_handle_Compute.Main" computeMode="all">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="139,293" computeExpression="esql://routine/#error_handle_Compute.Main" computeMode="all">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmTryCatch.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="523,173">
+      <nodes xmi:type="ComIbmTryCatch.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="480,410">
         <translation xmi:type="utility:ConstantString" string="Try Catch1"/>
       </nodes>
-      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="657,77" messageText="ID is Not matched.....">
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="593,306" messageText="ID is Not matched.....">
         <translation xmi:type="utility:ConstantString" string="Throw1"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="660,241" computeExpression="esql://routine/#error_handle_Compute1.Main" computeMode="all">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="604,438" computeExpression="esql://routine/#error_handle_Compute1.Main" computeMode="all">
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="260,321" computeExpression="esql://routine/#error_handle_Compute4.Main" computeMode="all">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="275,190" computeExpression="esql://routine/#error_handle_Compute4.Main" computeMode="all">
         <translation xmi:type="utility:ConstantString" string="Compute4"/>
       </nodes>
-      <nodes xmi:type="ComIbmLog.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="318,18" logLevel="Info" logMessage="{{$mappingInput_InputRoot}}{{$flowDetails}}">
+      <nodes xmi:type="ComIbmLog.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="253,287" logLevel="Info" logMessage="{{$mappingInput_InputRoot}}{{$flowDetails}}">
         <translation xmi:type="utility:ConstantString" string="Log"/>
         <mappingInput inputName="InputRoot" inputLocation="$InputRoot" schemaLocation="" schemaRoot=""/>
         <mappingInput inputName="InputLocalEnvironment" inputLocation="$InputLocalEnvironment" schemaLocation="" schemaRoot=""/>
