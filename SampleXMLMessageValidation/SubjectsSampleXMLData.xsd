@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Subjects">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="Subject"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Code">
+  	<xsd:simpleType>
+  		<xsd:restriction base="xsd:string">
+  			<xsd:minLength value="4"></xsd:minLength>
+  		</xsd:restriction>
+  	</xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Subject">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Name"/>
+        <xsd:element ref="Code"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Name">
+  	<xsd:simpleType>
+  		<xsd:restriction base="xsd:string">
+  			<xsd:maxLength value="20"></xsd:maxLength>
+  		</xsd:restriction>
+  	</xsd:simpleType>
+  </xsd:element>
+</xsd:schema>
