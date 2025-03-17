@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MessageBroker name="Transformation_Map">
+  <XSDCollection href="platform:/resource/Transformation_Map/InputXMLSchema.xsd" prefix="" targetNamespace="">
+    <element href="platform:/resource/Transformation_Map/InputXMLSchema.xsd#//SaleEnvelope;XSDElementDeclaration" name="SaleEnvelope"/>
+  </XSDCollection>
+  <XSDCollection href="platform:/resource/Transformation_Map/OutputXMLSchema.xsd" prefix="" targetNamespace="">
+    <element href="platform:/resource/Transformation_Map/OutputXMLSchema.xsd#//SaleEnvelopeA;XSDElementDeclaration" name="SaleEnvelopeA"/>
+  </XSDCollection>
+</MessageBroker>

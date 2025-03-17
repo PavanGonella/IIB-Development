@@ -1,0 +1,26 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		-- CALL CopyMessageHeaders();
+	 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+	-- Example JSON message in InputRoot
+SET InputRoot.JSON = '{"name": "John Doe", "age": 30, "email": "johndoe@example.com"}';
+
+-- Convert InputRoot.JSON to BLOB and store in OutputRoot.BLOB
+SET OutputRoot.BLOB = ASBITSTREAM(InputRoot.JSON, 'BLOB');
+
+
+	END;

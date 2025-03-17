@@ -1,0 +1,3 @@
+CREATE PROCEDURE getAllCustomers ( IN max INTEGER, INOUT output REFERENCE )
+LANGUAGE JAVA
+EXTERNAL NAME "CustomerDatabase.getAllCustomers";

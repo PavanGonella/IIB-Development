@@ -1,0 +1,10 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+	DECLARE var REFERENCE TO InputRoot.XMLNSC.Emp;
+	CALL myProc(var.Name, var.Age, var.Salary);
+		
+    SET OutputRoot.JSON.Data.Result = 'Successsfully inserted';
+		
+	END;
+
+    

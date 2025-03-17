@@ -1,0 +1,15 @@
+
+
+CREATE COMPUTE MODULE DatabaseGET_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE Inref REFERENCE TO InputLocalEnvironment.HTTP.Input.QueryString;
+		DECLARE id INTEGER;
+		DECLARE Query CHARACTER ;
+		SET  Query = 'Select * From EMPLOYEE2 where id=?';
+		SET id = Inref.id;
+		
+		SET OutputRoot.JSON.Data.Result = PASSTHRU( Query Values (id));
+		RETURN TRUE;
+	END;			
+END MODULE;

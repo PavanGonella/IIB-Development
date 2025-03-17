@@ -1,0 +1,32 @@
+CREATE COMPUTE MODULE FormatFunctionCurrency_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE sourceCurrency DECIMAL 12345.678;
+		DECLARE pattern CHARACTER '##,##0,00';
+--		 # (Hash): This character is a placeholder for optional digits. If there are no digits to display in that position, 
+--		 it will be omitted. For example, in the pattern #,##0.00, the # characters allow for the inclusion of thousands separators if needed,
+--	     but they won't force leading zeros.
+--
+--		0 (Zero): This character is a placeholder for mandatory digits. It ensures that a digit is displayed in that position,
+-- 		even if it means adding leading or trailing zeros. For example, in the pattern #,##0.00, the 0 before the decimal point ensures that at least one digit is displayed (even if it's zero),
+-- 	    and the 00 after the decimal point ensures that two decimal places are always shown.
+		
+		SET OutputRoot.JSON.Data.resultCurrency = CAST(sourceCurrency AS CHARACTER FORMAT pattern);
+	END;
+END MODULE;

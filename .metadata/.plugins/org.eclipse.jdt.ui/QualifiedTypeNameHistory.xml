@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.ibm.broker.plugin.MbJSON"/>
+    <fullyQualifiedTypeName name="com.ibm.broker.plugin.MbMessage"/>
+    <fullyQualifiedTypeName name="com.ibm.broker.plugin.MbXMLNSC"/>
+    <fullyQualifiedTypeName name="com.ibm.broker.plugin.MbElement"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator"/>
+    <fullyQualifiedTypeName name="com.ibm.broker.plugin.MbGlobalMap"/>
+</qualifiedTypeNameHistroy>

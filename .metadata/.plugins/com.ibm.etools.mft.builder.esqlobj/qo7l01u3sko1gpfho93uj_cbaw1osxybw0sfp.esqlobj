@@ -1,0 +1,7 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		DECLARE var Root.Data ;
+		SET var = Select * from table1
+		RETURN TRUE;
+	END;
+

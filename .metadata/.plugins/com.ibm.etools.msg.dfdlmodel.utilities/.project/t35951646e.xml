@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MessageBroker name="DB_log_task">
+  <XSDCollection href="platform:/resource/DB_log_task/IBMdefined/CommaSeparatedFormat.xsd" prefix="tns" targetNamespace="http://www.ibm.com/dfdl/CommaSeparatedFormat"/>
+  <XSDCollection href="platform:/resource/DB_log_task/jojo.xsd" prefix="" targetNamespace="">
+    <import name="IBMdefined/CommaSeparatedFormat.xsd" targetNamespace="http://www.ibm.com/dfdl/CommaSeparatedFormat"/>
+    <element href="platform:/resource/DB_log_task/jojo.xsd#//jojo;XSDElementDeclaration" name="jojo"/>
+  </XSDCollection>
+</MessageBroker>

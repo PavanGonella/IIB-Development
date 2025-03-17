@@ -1,0 +1,21 @@
+CREATE COMPUTE MODULE MergeData_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+		BEGIN
+			CALL MergeDataFunction();
+			RETURN TRUE;
+		END;
+	
+	CREATE PROCEDURE MergeDataFunction() BEGIN
+		
+			DECLARE ref1 REFERENCE TO InputRoot.XMLNSC.source1.one;
+			DECLARE ref2 REFERENCE TO InputRoot.XMLNSC.source2.two;
+			
+			CREATE LASTCHILD OF OutputRoot DOMAIN('XMLNSC');
+			
+			CREATE FIELD OutputRoot.XMLNSC.MergeData;
+			
+			SET OutputRoot.XMLNSC.Data.MergeData.Field1 = ref1.Field1;
+			SET OutputRoot.XMLNSC.MergeData.Field2 = ref2.Field2;
+			SET OutputRoot.XMLNSC.MergeData.CombinedField = ref1.Field3 || '-' || ref2.Field3;
+		END;
+END MODULE;
